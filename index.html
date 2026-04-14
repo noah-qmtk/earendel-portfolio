@@ -351,63 +351,73 @@ function apiKey() {
   return k || DEFAULT_API_KEY;
 }
 
-// Simple token-bucket: allow 4 requests, refill 1 every 15s
-const _rl = {tokens:4, lastRefill: Date.now()};
-async function waitForToken() {
-  while(true) {
-    const now = Date.now();
-    const elapsed = (now - _rl.lastRefill) / 1000;
-    _rl.tokens = Math.min(4, _rl.tokens + elapsed * (1/15));
-    _rl.lastRefill = now;
-    if (_rl.tokens >= 1) { _rl.tokens -= 1; return; }
-    await new Promise(r => setTimeout(r, 2000));
-  }
-}
-
 async function polyFetch(url) {
   const key = apiKey();
   if (!key) return null;
-  await waitForToken();
   const sep = url.includes('?') ? '&' : '?';
   const r = await fetch(`https://api.polygon.io${url}${sep}apiKey=${key}`);
-  if (r.status === 429) {
-    // Back off 15s and retry once
-    await new Promise(res => setTimeout(res, 15000));
-    const r2 = await fetch(`https://api.polygon.io${url}${sep}apiKey=${key}`);
-    if (!r2.ok) return null;
-    return r2.json();
-  }
   if (!r.ok) return null;
   return r.json();
 }
 
-async function fetchQuote(symbol) {
-  // Use daily aggs (last 2 trading days) — works on free tier with DELAYED status
+// Fetch all quotes in ONE bulk call using grouped daily endpoint
+async function fetchAllQuotes() {
   const today = new Date();
-  const from = new Date(today - 7 * 86400000); // go back 7 days to catch last trading day
   const fmt = d => d.toISOString().split('T')[0];
+  // Try last 5 days to ensure we hit a trading day
+  const results = {};
+  let latestBars = null, prevBars = null;
 
-  const [bars, details] = await Promise.all([
-    polyFetch(`/v2/aggs/ticker/${symbol}/range/1/day/${fmt(from)}/${fmt(today)}?adjusted=true&sort=desc&limit=3`),
-    polyFetch(`/v3/reference/tickers/${symbol}`),
-  ]);
+  for (let daysBack = 1; daysBack <= 7; daysBack++) {
+    const d = new Date(today - daysBack * 86400000);
+    const dateStr = fmt(d);
+    const data = await polyFetch(`/v2/aggs/grouped/locale/us/market/stocks/${dateStr}?adjusted=true`);
+    if (data?.results?.length > 0) {
+      if (!latestBars) { latestBars = data.results; }
+      else if (!prevBars) { prevBars = data.results; break; }
+    }
+  }
 
+  // Build lookup maps
+  const latestMap = {};
+  const prevMap = {};
+  (latestBars || []).forEach(r => { latestMap[r.T] = r; });
+  (prevBars   || []).forEach(r => { prevMap[r.T]   = r; });
+
+  POSITIONS.forEach(pos => {
+    const sym = pos.symbol;
+    const latest = latestMap[sym] || {};
+    const prev   = prevMap[sym]   || {};
+    const price     = latest.c || pos.avg_cost;
+    const prevClose = prev.c   || price;
+    const change    = prevClose ? price - prevClose : 0;
+    const changePct = prevClose ? (change / prevClose * 100) : 0;
+    results[sym] = {
+      symbol: sym, name: sym,
+      price, prevClose,
+      open: latest.o || 0, high: latest.h || 0, low: latest.l || 0,
+      vol: latest.v || 0, change, changePct
+    };
+  });
+  return results;
+}
+
+async function fetchQuote(symbol) {
+  // Fallback single-ticker fetch
+  const today = new Date();
+  const from = new Date(today - 7 * 86400000);
+  const fmt = d => d.toISOString().split('T')[0];
+  const bars = await polyFetch(`/v2/aggs/ticker/${symbol}/range/1/day/${fmt(from)}/${fmt(today)}?adjusted=true&sort=desc&limit=3`);
   const results = bars?.results || [];
-  const latest  = results[0] || {};   // most recent trading day
-  const prev    = results[1] || {};   // day before
-
+  const latest = results[0] || {};
+  const prev   = results[1] || {};
   const price     = latest.c || 0;
-  const prevClose = prev.c   || 0;
-  const open      = latest.o || 0;
-  const high      = latest.h || 0;
-  const low       = latest.l || 0;
-  const vol       = latest.v || 0;
+  const prevClose = prev.c   || price;
   const change    = prevClose ? price - prevClose : 0;
   const changePct = prevClose ? (change / prevClose * 100) : 0;
-  const name      = details?.results?.name || symbol;
-
-  return {symbol, name, price, prevClose, open, high, low, vol,
-          change, changePct};
+  return { symbol, name: symbol, price, prevClose,
+           open: latest.o||0, high: latest.h||0, low: latest.l||0,
+           vol: latest.v||0, change, changePct };
 }
 
 async function fetchHistory(symbol, range) {
@@ -565,33 +575,36 @@ async function loadAllData() {
   document.getElementById('mkt-status').textContent = 'Fetching data…';
   const syms = POSITIONS.map(p => p.symbol);
 
-  // Fetch all quotes sequentially (rate limit friendly)
-  for (const s of syms) {
-    try {
-      const q = await fetchQuote(s);
-      stockData[q.symbol] = q;
-    } catch(e) {
-      stockData[s] = {symbol:s, price:0, change:0, changePct:0};
+  // Step 1: Bulk fetch all quotes in 2 API calls (grouped daily)
+  try {
+    const quotes = await fetchAllQuotes();
+    Object.assign(stockData, quotes);
+  } catch(e) {
+    // fallback: fetch individually
+    for (const s of syms) {
+      try { stockData[s] = await fetchQuote(s); } catch(e2) {}
     }
   }
 
-  // Fetch 1Y history sequentially to respect free-tier rate limit
-  for (const s of syms) {
+  // Render immediately with price data while history loads
+  renderTable(); renderSummary();
+
+  // Step 2: Fetch 1Y history for all tickers in parallel (one request each)
+  await Promise.all(syms.map(async s => {
     try {
       const bars = await fetchHistory(s, '1Y');
       const closes = bars.map(b => b.c);
-      const rsi = calcRSI(closes);
-      const macd = calcMACD(closes);
-      const volRatio = calcVolRatio(bars);
-      const wk52Pct = calc52wPct(bars, stockData[s]?.price || 0);
-      indicators[s] = {rsi, macd, vol_ratio: volRatio, wk52_pct: wk52Pct, bars1Y: bars};
-      // Render table progressively as each ticker loads
-      renderTable();
-      renderSummary();
+      indicators[s] = {
+        rsi:      calcRSI(closes),
+        macd:     calcMACD(closes),
+        vol_ratio: calcVolRatio(bars),
+        wk52_pct: calc52wPct(bars, stockData[s]?.price || 0),
+        bars1Y:   bars
+      };
     } catch(e) {
       indicators[s] = {rsi:null, macd:null, vol_ratio:null, wk52_pct:null, bars1Y:[]};
     }
-  }
+  }));
 
   setStatus('live');
   document.getElementById('mkt-status').textContent = isMarketOpen() ? '🟢 Market Open' : '🔴 Market Closed';
