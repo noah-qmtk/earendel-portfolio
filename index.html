@@ -6,120 +6,133 @@
 <title>Earendel Portfolio</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: #f8f9fb; color: #111; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; min-height: 100vh; }
+body { background: #f7f8fa; color: #111; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; min-height: 100vh; }
 
-/* ── LOCK ── */
-#lock { position: fixed; inset: 0; background: #fff; display: flex; align-items: center; justify-content: center; z-index: 999; }
-.lock-box { text-align: center; width: 320px; }
-.lock-box h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: .25rem; }
-.lock-box p { color: #888; font-size: .85rem; margin-bottom: 1.5rem; }
-.lock-input { width: 100%; border: 1.5px solid #e0e0e0; border-radius: 8px; padding: .75rem 1rem; font-size: 1rem; outline: none; transition: border .2s; background: #fafafa; }
-.lock-input:focus { border-color: #111; }
-.lock-btn { width: 100%; margin-top: .6rem; background: #111; color: #fff; border: none; padding: .75rem; border-radius: 8px; font-size: .95rem; font-weight: 600; cursor: pointer; }
-.lock-btn:hover { background: #333; }
-.lock-err { color: #e53e3e; font-size: .8rem; margin-top: .5rem; min-height: 1rem; }
+/* LOCK */
+#lock { position:fixed;inset:0;background:#fff;display:flex;align-items:center;justify-content:center;z-index:999; }
+.lbox { text-align:center;width:300px; }
+.lbox h2 { font-size:1.3rem;font-weight:700;margin-bottom:.2rem; }
+.lbox p { color:#aaa;font-size:.82rem;margin-bottom:1.25rem; }
+.linput { width:100%;border:1.5px solid #e5e5e5;border-radius:8px;padding:.7rem 1rem;font-size:.95rem;outline:none;background:#fafafa; }
+.linput:focus { border-color:#111; }
+.lbtn { width:100%;margin-top:.5rem;background:#111;color:#fff;border:none;padding:.7rem;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer; }
+.lerr { color:#dc2626;font-size:.78rem;margin-top:.4rem;min-height:1rem; }
 
-/* ── APP ── */
-#app { display: none; }
+/* APP */
+#app { display:none; }
 
-/* ── HEADER ── */
-header { background: #fff; border-bottom: 1px solid #eee; padding: .9rem 1.5rem; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; }
-.hd-left h1 { font-size: 1rem; font-weight: 700; letter-spacing: -.01em; }
-.hd-left .hd-sub { font-size: .75rem; color: #999; margin-top: .1rem; }
-.hd-right { display: flex; gap: .5rem; align-items: center; }
-.dot { width: 7px; height: 7px; border-radius: 50%; background: #ccc; }
-.dot.live { background: #22c55e; box-shadow: 0 0 5px #22c55e88; }
-.hbtn { background: #fff; border: 1px solid #e0e0e0; color: #555; padding: .35rem .8rem; border-radius: 6px; font-size: .75rem; cursor: pointer; }
-.hbtn:hover { border-color: #111; color: #111; }
+/* HEADER */
+header { background:#fff;border-bottom:1px solid #eee;padding:.85rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50; }
+.hd-brand { font-size:.95rem;font-weight:700; }
+.hd-meta { font-size:.72rem;color:#aaa;margin-top:.1rem; }
+.hd-right { display:flex;gap:.5rem;align-items:center; }
+.dot { width:7px;height:7px;border-radius:50%;background:#ddd;flex-shrink:0; }
+.dot.live { background:#22c55e;box-shadow:0 0 5px #22c55e66; }
+.hbtn { background:#fff;border:1px solid #e5e5e5;color:#666;padding:.3rem .75rem;border-radius:6px;font-size:.73rem;cursor:pointer; }
+.hbtn:hover { border-color:#111;color:#111; }
 
-/* ── SUMMARY STRIP ── */
-.summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: .75rem; padding: 1.25rem 1.5rem; max-width: 1500px; margin: 0 auto; }
-.scard { background: #fff; border: 1px solid #eee; border-radius: 10px; padding: 1rem 1.1rem; }
-.scard .lbl { font-size: .68rem; color: #999; text-transform: uppercase; letter-spacing: .06em; margin-bottom: .3rem; }
-.scard .val { font-size: 1.4rem; font-weight: 700; letter-spacing: -.02em; }
-.scard .sub { font-size: .75rem; color: #999; margin-top: .15rem; }
-.up { color: #16a34a; } .dn { color: #dc2626; } .neu { color: #888; }
+/* PORTFOLIO HERO */
+.hero { background:#fff;border-bottom:1px solid #eee;padding:1.5rem; }
+.hero-inner { max-width:1400px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start; }
+.hero-value { }
+.hero-value .val { font-size:2.4rem;font-weight:800;letter-spacing:-.03em;line-height:1; }
+.hero-value .sub { font-size:.82rem;color:#888;margin-top:.4rem; }
+.hero-value .change { font-size:1rem;font-weight:600;margin-top:.25rem; }
+.hero-cards { display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.75rem; }
+.hcard { background:#f7f8fa;border-radius:10px;padding:.85rem 1rem; }
+.hcard .lbl { font-size:.65rem;color:#aaa;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem; }
+.hcard .val2 { font-size:1.1rem;font-weight:700; }
+.hcard .sub2 { font-size:.7rem;color:#aaa;margin-top:.1rem; }
+.up{color:#16a34a}.dn{color:#dc2626}.neu{color:#888}.warn{color:#d97706}
 
-/* ── ROTATE ALERT ── */
-#rotate-bar { max-width: 1500px; margin: 0 auto; padding: 0 1.5rem .75rem; display: flex; gap: .5rem; flex-wrap: wrap; }
-.rpill { padding: .3rem .8rem; border-radius: 20px; font-size: .72rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: .35rem; border: 1px solid; }
-.rpill-sell { background: #fff5f5; color: #dc2626; border-color: #fecaca; }
-.rpill-buy  { background: #f0fdf4; color: #16a34a; border-color: #bbf7d0; }
-.rpill-watch{ background: #fffbeb; color: #d97706; border-color: #fde68a; }
+/* INSIGHT BANNER */
+.insights { max-width:1400px;margin:1.25rem auto 0;padding:0 1.5rem; }
+.insight-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:.75rem; }
+.icard { background:#fff;border:1px solid #eee;border-radius:10px;padding:1rem 1.1rem;display:flex;gap:.85rem;align-items:flex-start; }
+.icard-icon { font-size:1.3rem;flex-shrink:0;margin-top:.1rem; }
+.icard-body .title { font-size:.82rem;font-weight:700;margin-bottom:.2rem; }
+.icard-body .text { font-size:.78rem;color:#555;line-height:1.5; }
+.icard.green { border-left:3px solid #22c55e; }
+.icard.red   { border-left:3px solid #dc2626; }
+.icard.yellow{ border-left:3px solid #f59e0b; }
+.icard.blue  { border-left:3px solid #3b82f6; }
+.icard.gray  { border-left:3px solid #ccc; }
 
-/* ── TABLE ── */
-.tbl-wrap { max-width: 1500px; margin: 0 auto; padding: 0 1.5rem 3rem; overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; font-size: .82rem; background: #fff; border: 1px solid #eee; border-radius: 12px; overflow: hidden; }
-thead { background: #fafafa; }
-th { padding: .7rem .9rem; color: #888; font-weight: 600; font-size: .68rem; text-transform: uppercase; letter-spacing: .05em; text-align: right; border-bottom: 1px solid #eee; cursor: pointer; user-select: none; white-space: nowrap; }
-th:first-child { text-align: left; }
-th:hover { color: #111; }
-th.sorted { color: #111; }
-td { padding: .65rem .9rem; border-bottom: 1px solid #f3f3f3; text-align: right; vertical-align: middle; white-space: nowrap; }
-td:first-child { text-align: left; }
-tr:last-child td { border-bottom: none; }
-tr { cursor: pointer; transition: background .1s; }
-tr:hover td { background: #fafafa; }
-tr.sel td { background: #f0f9ff; }
+/* MAIN */
+.main { max-width:1400px;margin:1.25rem auto 0;padding:0 1.5rem 3rem; }
+.section-title { font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#aaa;margin-bottom:.75rem; }
 
-.sym { font-weight: 700; font-size: .85rem; }
-.name-s { color: #999; font-size: .72rem; }
+/* STOCK CARDS */
+.stock-grid { display:flex;flex-direction:column;gap:.5rem; }
+.srow { background:#fff;border:1px solid #eee;border-radius:10px;overflow:hidden;cursor:pointer;transition:box-shadow .15s; }
+.srow:hover { box-shadow:0 2px 12px rgba(0,0,0,.07); }
+.srow.open { box-shadow:0 2px 16px rgba(0,0,0,.1); }
+.srow-top { display:grid;grid-template-columns:180px 110px 100px 110px 1fr 160px;align-items:center;padding:.9rem 1.1rem;gap:.5rem; }
 
-/* Valuation badge */
-.vbadge { display: inline-block; padding: .2rem .55rem; border-radius: 5px; font-size: .7rem; font-weight: 700; }
-.vb-cheap   { background: #f0fdf4; color: #16a34a; }
-.vb-fair    { background: #f8f9fb; color: #555; }
-.vb-pricey  { background: #fff7ed; color: #ea580c; }
-.vb-rich    { background: #fff5f5; color: #dc2626; }
-.vb-na      { background: #f3f4f6; color: #aaa; }
+.stk-name .sym { font-size:.9rem;font-weight:700; }
+.stk-name .nm { font-size:.72rem;color:#aaa;margin-top:.1rem; }
+.stk-price { text-align:right; }
+.stk-price .p { font-size:.9rem;font-weight:600; }
+.stk-price .chg { font-size:.72rem;margin-top:.1rem; }
+.stk-gl { text-align:right; }
+.stk-gl .pct { font-size:.9rem;font-weight:700; }
+.stk-gl .abs { font-size:.72rem;color:#aaa;margin-top:.1rem; }
 
-/* Profitability */
-.prof { display: inline-block; padding: .2rem .55rem; border-radius: 5px; font-size: .7rem; font-weight: 700; }
-.prof-yes { background: #f0fdf4; color: #16a34a; }
-.prof-no  { background: #fff5f5; color: #dc2626; }
-.prof-na  { background: #f3f4f6; color: #aaa; }
+/* Story health pill */
+.story { display:flex;align-items:center;gap:.4rem; }
+.story-dot { width:9px;height:9px;border-radius:50%;flex-shrink:0; }
+.story-text { font-size:.75rem;font-weight:600; }
 
-/* ── DETAIL DRAWER ── */
-#drawer { display: none; background: #fff; border-top: 1px solid #eee; }
-.drawer-inner { max-width: 1500px; margin: 0 auto; padding: 1.5rem; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; }
-@media(max-width:900px){ .drawer-inner { grid-template-columns: 1fr 1fr; } }
-@media(max-width:600px){ .drawer-inner { grid-template-columns: 1fr; } }
-.drawer-section h4 { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: #aaa; margin-bottom: .75rem; }
-.drow { display: flex; justify-content: space-between; align-items: center; padding: .45rem 0; border-bottom: 1px solid #f3f3f3; font-size: .82rem; }
-.drow:last-child { border-bottom: none; }
-.drow .dlbl { color: #888; }
-.drow .dval { font-weight: 600; }
+/* Verdict */
+.verdict-wrap { }
+.verdict-tag { display:inline-block;padding:.25rem .65rem;border-radius:20px;font-size:.72rem;font-weight:700; }
+.v-great  { background:#f0fdf4;color:#16a34a; }
+.v-fair   { background:#f0f9ff;color:#2563eb; }
+.v-pricey { background:#fff7ed;color:#ea580c; }
+.v-watch  { background:#fffbeb;color:#d97706; }
+.v-na     { background:#f3f4f6;color:#aaa; }
 
-/* Bull/Bear/Fair price bars */
-.price-range { margin-top: .75rem; }
-.pr-row { display: flex; align-items: center; gap: .6rem; margin-bottom: .4rem; font-size: .78rem; }
-.pr-label { width: 50px; color: #888; }
-.pr-bar-wrap { flex: 1; background: #f3f4f6; border-radius: 4px; height: 6px; position: relative; }
-.pr-bar { height: 6px; border-radius: 4px; }
-.pr-val { width: 60px; text-align: right; font-weight: 600; }
-.pr-current-line { position: absolute; top: -3px; height: 12px; width: 2px; background: #111; border-radius: 1px; }
+/* Action */
+.action-wrap { text-align:right; }
+.action-main { font-size:.8rem;font-weight:700; }
+.action-sub  { font-size:.7rem;color:#aaa;margin-top:.15rem;line-height:1.4; }
 
-/* Rotation signal box */
-.rot-box { background: #fafafa; border-radius: 8px; padding: 1rem; }
-.rot-box .rot-title { font-size: .78rem; font-weight: 700; margin-bottom: .6rem; }
-.rot-item { padding: .4rem .6rem; border-radius: 6px; margin-bottom: .35rem; font-size: .78rem; }
-.rot-sell { background: #fff5f5; border-left: 3px solid #dc2626; }
-.rot-buy  { background: #f0fdf4; border-left: 3px solid #16a34a; }
-.rot-hold { background: #f8f9fb; border-left: 3px solid #ccc; }
-.rot-name { font-weight: 600; margin-bottom: .15rem; }
-.rot-why  { color: #888; font-size: .72rem; }
+/* DRAWER */
+.srow-detail { border-top:1px solid #f3f3f3;padding:1.25rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem; }
+@media(max-width:800px){.srow-detail{grid-template-columns:1fr 1fr}}
+@media(max-width:500px){.srow-detail{grid-template-columns:1fr}}
 
-canvas { width: 100% !important; height: 140px !important; }
+.det-section h4 { font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#bbb;margin-bottom:.65rem; }
+.det-row { display:flex;justify-content:space-between;align-items:baseline;padding:.35rem 0;border-bottom:1px solid #f7f7f7;font-size:.8rem; }
+.det-row:last-child { border:none; }
+.det-lbl { color:#888; }
+.det-val { font-weight:600; }
 
-/* Loading */
-.loading-row td { text-align: center; padding: 3rem; color: #aaa; }
-.spinner { width: 24px; height: 24px; border: 2px solid #eee; border-top-color: #111; border-radius: 50%; animation: spin .6s linear infinite; margin: 0 auto .5rem; }
-@keyframes spin { to { transform: rotate(360deg); } }
+/* Bull-bear range */
+.bbrange { margin:.75rem 0; }
+.bbrange-bar { position:relative;height:8px;border-radius:4px;background:linear-gradient(to right,#fee2e2 0%,#fef9c3 50%,#dcfce7 100%); }
+.bbrange-dot { position:absolute;top:-4px;width:4px;height:16px;background:#111;border-radius:2px;transform:translateX(-50%); }
+.bbrange-labels { display:flex;justify-content:space-between;font-size:.68rem;margin-top:.35rem; }
 
-@media(max-width:700px){
-  .summary { grid-template-columns: 1fr 1fr; padding: 1rem; }
-  .tbl-wrap { padding: 0 .75rem 2rem; }
-  header { padding: .7rem 1rem; }
+/* Plain-english explain box */
+.explain-box { background:#fafafa;border-radius:8px;padding:.9rem 1rem;margin-top:.75rem; }
+.explain-box .eq { font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#aaa;margin-bottom:.4rem; }
+.explain-box p { font-size:.8rem;color:#444;line-height:1.6; }
+
+canvas { width:100%!important;height:130px!important; }
+
+.loading-state { text-align:center;padding:4rem;color:#aaa; }
+.spinner { width:24px;height:24px;border:2px solid #eee;border-top-color:#111;border-radius:50%;animation:spin .6s linear infinite;margin:0 auto .6rem; }
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:900px){
+  .srow-top{grid-template-columns:1fr 1fr;grid-template-rows:auto auto auto;}
+  .hero-inner{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  .hero{padding:1rem;}
+  .insights,.main{padding:0 .75rem 2rem;}
+  .insights{margin-top:.75rem;}
 }
 </style>
 </head>
@@ -127,76 +140,71 @@ canvas { width: 100% !important; height: 140px !important; }
 
 <!-- LOCK -->
 <div id="lock">
-  <div class="lock-box">
-    <div style="font-size:1.8rem;margin-bottom:.5rem">📈</div>
+  <div class="lbox">
+    <div style="font-size:1.6rem;margin-bottom:.4rem">📈</div>
     <h2>Earendel Portfolio</h2>
-    <p>Private · Shaya's investments</p>
-    <input class="lock-input" type="password" id="pw" placeholder="Password" onkeydown="if(event.key==='Enter')unlock()">
-    <button class="lock-btn" onclick="unlock()">Enter</button>
-    <div class="lock-err" id="lock-err"></div>
+    <p>Shaya · Private</p>
+    <input class="linput" id="pw" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')unlock()">
+    <button class="lbtn" onclick="unlock()">Enter</button>
+    <div class="lerr" id="lerr"></div>
   </div>
 </div>
 
 <!-- APP -->
 <div id="app">
-  <header>
-    <div class="hd-left">
-      <h1>Earendel Portfolio</h1>
-      <div class="hd-sub" id="hd-sub">Loading…</div>
-    </div>
-    <div class="hd-right">
-      <div class="dot" id="dot"></div>
-      <span style="font-size:.72rem;color:#aaa" id="last-ts"></span>
-      <button class="hbtn" onclick="loadAllData()">↻ Refresh</button>
-      <button class="hbtn" onclick="signOut()">Sign out</button>
-    </div>
-  </header>
 
-  <!-- Summary -->
-  <div class="summary">
-    <div class="scard"><div class="lbl">Portfolio Value</div><div class="val" id="s-val">—</div><div class="sub" id="s-pos">—</div></div>
-    <div class="scard"><div class="lbl">Total Return</div><div class="val" id="s-gl">—</div><div class="sub" id="s-glp">—</div></div>
-    <div class="scard"><div class="lbl">Today's P&amp;L</div><div class="val" id="s-day">—</div><div class="sub" id="s-dayp">—</div></div>
-    <div class="scard"><div class="lbl">Avg Upside to Fair</div><div class="val" id="s-upside">—</div><div class="sub">across all positions</div></div>
-    <div class="scard"><div class="lbl">Rotation Alerts</div><div class="val" id="s-alerts">—</div><div class="sub">sell / rotate signals</div></div>
+<header>
+  <div>
+    <div class="hd-brand">Earendel Portfolio</div>
+    <div class="hd-meta" id="hd-meta">Loading…</div>
   </div>
-
-  <!-- Rotation pills -->
-  <div id="rotate-bar"></div>
-
-  <!-- Table -->
-  <div class="tbl-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th onclick="sortBy('symbol')" style="text-align:left">Stock</th>
-          <th onclick="sortBy('price')">Price</th>
-          <th onclick="sortBy('changePct')">Day %</th>
-          <th onclick="sortBy('gain_loss_pct')">My G/L</th>
-          <th onclick="sortBy('market_value')">Mkt Val</th>
-          <th>Profitable?</th>
-          <th onclick="sortBy('fwd_pe')">Fwd P/E</th>
-          <th onclick="sortBy('fair_upside')">Fair Value</th>
-          <th>Valuation</th>
-          <th>Bear → Bull</th>
-          <th onclick="sortBy('rotation_score')">Rotate?</th>
-        </tr>
-      </thead>
-      <tbody id="tbody">
-        <tr class="loading-row"><td colspan="11"><div class="spinner"></div>Loading portfolio…</td></tr>
-      </tbody>
-    </table>
+  <div class="hd-right">
+    <div class="dot" id="dot"></div>
+    <span style="font-size:.7rem;color:#bbb" id="ts">—</span>
+    <button class="hbtn" onclick="loadAllData()">↻ Refresh</button>
+    <button class="hbtn" onclick="signOut()">Sign out</button>
   </div>
+</header>
 
-  <!-- Detail drawer (shown below selected row) -->
-  <div id="drawer">
-    <div class="drawer-inner" id="drawer-inner"></div>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-value">
+      <div class="lbl" style="font-size:.68rem;color:#aaa;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem">Total Portfolio Value</div>
+      <div class="val" id="h-val">—</div>
+      <div class="change" id="h-gl">—</div>
+      <div class="sub" id="h-day">—</div>
+    </div>
+    <div class="hero-cards">
+      <div class="hcard"><div class="lbl">Cost Basis</div><div class="val2" id="hc-cost">—</div><div class="sub2">Total invested</div></div>
+      <div class="hcard"><div class="lbl">Avg Upside</div><div class="val2" id="hc-up">—</div><div class="sub2">to fair value</div></div>
+      <div class="hcard"><div class="lbl">Profitable Cos.</div><div class="val2" id="hc-prof">—</div><div class="sub2">making money</div></div>
+      <div class="hcard"><div class="lbl">Stories Intact</div><div class="val2" id="hc-story">—</div><div class="sub2">worth holding</div></div>
+      <div class="hcard"><div class="lbl">Best Position</div><div class="val2 up" id="hc-best">—</div><div class="sub2" id="hc-best-s">—</div></div>
+    </div>
   </div>
 </div>
 
+<!-- INSIGHT BANNERS -->
+<div class="insights">
+  <div class="insight-grid" id="insight-grid">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<!-- STOCKS -->
+<div class="main">
+  <div class="section-title" style="margin-top:1.25rem">Your Positions — click any stock to see the full picture</div>
+  <div class="stock-grid" id="stock-grid">
+    <div class="loading-state"><div class="spinner"></div>Loading your portfolio…</div>
+  </div>
+</div>
+
+</div><!-- end app -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
-// ─── CONFIG ───────────────────────────────────────────────────────────────────
+// ─── CONFIG ──────────────────────────────────────────────────
 const API_KEY = "cCiEdNwOS75RSd607RmwrzQLJWzcP2mC";
 
 const POSITIONS = [
@@ -215,572 +223,454 @@ const POSITIONS = [
   {symbol:"OPEN",  shares:250.233027, avg_cost:7.22},
 ];
 
-// ─── AUTH ─────────────────────────────────────────────────────────────────────
-async function sha256(s) {
-  const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
-  return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('');
+// ─── AUTH ─────────────────────────────────────────────────────
+async function sha256(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('');}
+async function unlock(){const h=await sha256(document.getElementById('pw').value),c=await sha256('RicardoKaka@2015');if(h===c){sessionStorage.setItem('a',h);document.getElementById('lock').style.display='none';document.getElementById('app').style.display='block';loadAllData();}else{document.getElementById('lerr').textContent='Wrong password';document.getElementById('pw').value='';}}
+function signOut(){sessionStorage.clear();location.reload();}
+async function checkAuth(){const s=sessionStorage.getItem('a');return s&&s===await sha256('RicardoKaka@2015');}
+
+// ─── STATE ────────────────────────────────────────────────────
+let data = [];  // enriched positions
+let charts = {};
+let openSym = null;
+
+// ─── FETCH ────────────────────────────────────────────────────
+async function pFetch(url){
+  try{const r=await fetch('https://api.polygon.io'+url+(url.includes('?')?'&':'?')+'apiKey='+API_KEY);return r.ok?r.json():null;}catch(e){return null;}
 }
-async function unlock() {
-  const h = await sha256(document.getElementById('pw').value);
-  const c = await sha256('RicardoKaka@2015');
-  if (h === c) {
-    sessionStorage.setItem('auth', h);
-    document.getElementById('lock').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-    loadAllData();
-  } else {
-    document.getElementById('lock-err').textContent = 'Wrong password';
-    document.getElementById('pw').value = '';
-  }
+async function yFetch(sym){
+  try{const r=await fetch(`https://query1.finance.yahoo.com/v10/finance/quoteSummary/${sym}?modules=defaultKeyStatistics,financialData,summaryDetail,price`);return r.ok?r.json():null;}catch(e){return null;}
 }
-function signOut() { sessionStorage.clear(); location.reload(); }
-async function checkAuth() {
-  const s = sessionStorage.getItem('auth');
-  return s && s === await sha256('RicardoKaka@2015');
-}
+function dStr(n=0){const d=new Date(Date.now()-n*86400000);return d.toISOString().split('T')[0];}
 
-// ─── STATE ────────────────────────────────────────────────────────────────────
-let enriched = [];   // [{...pos, price, fwd_pe, profitability, fair_value, ...}]
-let selectedSym = null;
-let sortCol = 'market_value';
-let sortDir = -1;
-let priceChart = null;
+// ─── LOAD ─────────────────────────────────────────────────────
+async function loadAllData(){
+  document.getElementById('dot').className='dot';
+  document.getElementById('hd-meta').textContent='Loading…';
 
-// ─── POLYGON ──────────────────────────────────────────────────────────────────
-async function pFetch(url) {
-  const sep = url.includes('?') ? '&' : '?';
-  try {
-    const r = await fetch(`https://api.polygon.io${url}${sep}apiKey=${API_KEY}`);
-    if (!r.ok) return null;
-    return r.json();
-  } catch(e) { return null; }
-}
+  const syms=POSITIONS.map(p=>p.symbol);
 
-function dateStr(daysBack=0) {
-  const d = new Date(Date.now() - daysBack * 86400000);
-  return d.toISOString().split('T')[0];
-}
-
-// Grouped daily — one call for all tickers
-async function fetchGrouped(daysBack) {
-  const d = await pFetch(`/v2/aggs/grouped/locale/us/market/stocks/${dateStr(daysBack)}?adjusted=true`);
-  return d?.results || [];
-}
-
-// Per-ticker: 1Y daily bars (for RSI, MACD, history)
-async function fetchBars(sym, days=370) {
-  const d = await pFetch(`/v2/aggs/ticker/${sym}/range/1/day/${dateStr(days)}/${dateStr(0)}?adjusted=true&sort=asc&limit=500`);
-  return d?.results || [];
-}
-
-// Ticker details (name, fwd_pe via financials)
-async function fetchDetails(sym) {
-  const d = await pFetch(`/v3/reference/tickers/${sym}`);
-  return d?.results || {};
-}
-
-// ─── INDICATORS ───────────────────────────────────────────────────────────────
-function rsi(closes, p=14) {
-  if (closes.length < p+1) return null;
-  let ag=0,al=0;
-  for(let i=1;i<=p;i++){const d=closes[i]-closes[i-1];d>0?ag+=d:al-=d;}
-  ag/=p; al/=p;
-  for(let i=p+1;i<closes.length;i++){const d=closes[i]-closes[i-1];ag=(ag*13+Math.max(d,0))/14;al=(al*13+Math.max(-d,0))/14;}
-  return al===0?100:Math.round(100-100/(1+ag/al));
-}
-
-function ema(arr, p) {
-  const k=2/(p+1); let r=[arr[0]];
-  for(let i=1;i<arr.length;i++) r.push(arr[i]*k+r[i-1]*(1-k));
-  return r;
-}
-
-function macdCross(closes) {
-  if(closes.length<35) return null;
-  const e12=ema(closes,12),e26=ema(closes,26);
-  const ml=e12.map((v,i)=>v-e26[i]);
-  const sig=ema(ml.slice(25),9);
-  const h=ml[ml.length-1]-sig[sig.length-1];
-  const ph=ml[ml.length-2]-sig[sig.length-2];
-  if(ph<0&&h>0) return 'bullish';
-  if(ph>0&&h<0) return 'bearish';
-  return h>0?'positive':'negative';
-}
-
-// ─── VALUATION ────────────────────────────────────────────────────────────────
-function computeValuation(price, eps, fwdEps, epsGrowth, bookVal, analystTarget) {
-  const growth = (epsGrowth||0)*100;
-
-  // Lynch Fair Value: EPS × growth rate (PEG=1 target)
-  const lynchFair = (eps>0 && growth>0) ? eps*growth : null;
-
-  // Lynch DCF-lite: Fwd EPS × (8.5 + 2×growth%)
-  const lynchDCF = (fwdEps>0 && growth>0) ? fwdEps*(8.5+2*growth) : null;
-
-  // Graham Number: √(22.5 × EPS × Book)
-  const graham = (eps>0 && bookVal>0) ? Math.sqrt(22.5*eps*bookVal) : null;
-
-  // Best estimate: average of available methods
-  const vals = [lynchFair, lynchDCF, graham, analystTarget].filter(v=>v&&v>0);
-  const fairValue = vals.length ? vals.reduce((a,b)=>a+b,0)/vals.length : null;
-
-  // Bull = analyst target or 1.3× fair; Bear = 0.7× fair
-  const bull = analystTarget || (fairValue ? fairValue*1.3 : null);
-  const bear = fairValue ? fairValue*0.7 : null;
-
-  const upside = (fairValue && price>0) ? ((fairValue-price)/price*100) : null;
-
-  let verdict = 'N/A';
-  if (upside !== null) {
-    if (upside > 25)       verdict = 'Cheap';
-    else if (upside > 5)   verdict = 'Fair';
-    else if (upside > -15) verdict = 'Pricey';
-    else                   verdict = 'Rich';
-  }
-
-  return { lynchFair, lynchDCF, graham, analystTarget, fairValue, bull, bear, upside, verdict };
-}
-
-// ─── ROTATION SIGNAL ─────────────────────────────────────────────────────────
-function rotationSignal(pos, price, val, fwdPe, epsGrowth, rsiVal, macdVal, debtEq) {
-  const signals = [];
-  const gainPct = pos.avg_cost ? (price - pos.avg_cost)/pos.avg_cost*100 : 0;
-
-  // Strong sell signals
-  if (val.verdict === 'Rich') signals.push({type:'sell', text:'Overvalued', why:`Trading ${Math.abs(val.upside).toFixed(0)}% above fair value`});
-  if (rsiVal > 75)            signals.push({type:'sell', text:'RSI Overbought', why:`RSI ${rsiVal} — likely extended`});
-  if (macdVal === 'bearish')  signals.push({type:'sell', text:'MACD Bearish Cross', why:'Momentum turning negative'});
-  if (gainPct > 100)          signals.push({type:'sell', text:`+${gainPct.toFixed(0)}% gain`, why:'Consider locking in profits'});
-  if (fwdPe > 40)             signals.push({type:'sell', text:`Fwd P/E ${fwdPe?.toFixed(1)}`, why:'Paying a lot for future earnings'});
-  if (debtEq > 200)           signals.push({type:'sell', text:'High debt', why:`Debt/Equity ${debtEq?.toFixed(0)}%`});
-
-  // Buy / hold signals
-  if (val.verdict === 'Cheap') signals.push({type:'buy', text:'Undervalued', why:`${val.upside?.toFixed(0)}% below fair value — consider adding`});
-  if (rsiVal < 35)             signals.push({type:'buy', text:'RSI Oversold', why:`RSI ${rsiVal} — potential entry point`});
-  if (macdVal === 'bullish')   signals.push({type:'buy', text:'MACD Bull Cross', why:'Momentum turning positive'});
-
-  if (!signals.length) signals.push({type:'hold', text:'Hold', why:'No strong signal — monitor'});
-
-  // Score: negative = lean sell, positive = lean buy
-  const score = signals.reduce((s,x)=>s+(x.type==='sell'?-1:x.type==='buy'?1:0),0);
-  return { signals, score };
-}
-
-// ─── LOAD ALL DATA ────────────────────────────────────────────────────────────
-async function loadAllData() {
-  document.getElementById('dot').className = 'dot';
-  document.getElementById('hd-sub').textContent = 'Loading…';
-  document.getElementById('tbody').innerHTML = '<tr class="loading-row"><td colspan="11"><div class="spinner"></div>Fetching live data…</td></tr>';
-
-  const syms = POSITIONS.map(p=>p.symbol);
-
-  // Step 1: Bulk quotes (2 grouped-daily calls)
-  let latestMap={}, prevMap={};
+  // 1. Bulk price data (Polygon grouped daily — 2 calls)
+  let latestMap={},prevMap={};
   for(let i=1;i<=7;i++){
-    const r = await fetchGrouped(i);
-    if(r.length>0){
-      if(!Object.keys(latestMap).length){ r.forEach(x=>{latestMap[x.T]=x;}); }
-      else if(!Object.keys(prevMap).length){ r.forEach(x=>{prevMap[x.T]=x;}); break; }
+    const r=await pFetch(`/v2/aggs/grouped/locale/us/market/stocks/${dStr(i)}?adjusted=true`);
+    const res=r?.results||[];
+    if(res.length){
+      if(!Object.keys(latestMap).length){res.forEach(x=>latestMap[x.T]=x);}
+      else if(!Object.keys(prevMap).length){res.forEach(x=>prevMap[x.T]=x);break;}
     }
   }
 
-  // Step 2: Per-ticker details + bars (parallel)
-  const detailsArr = await Promise.all(syms.map(s=>fetchDetails(s)));
-  const barsArr    = await Promise.all(syms.map(s=>fetchBars(s)));
+  // 2. Historical bars for charts (parallel)
+  const barsMap={};
+  await Promise.all(syms.map(async s=>{
+    const r=await pFetch(`/v2/aggs/ticker/${s}/range/1/day/${dStr(370)}/${dStr(0)}?adjusted=true&sort=asc&limit=500`);
+    barsMap[s]=r?.results||[];
+  }));
 
-  // Step 3: Enrich each position
-  enriched = POSITIONS.map((pos,i)=>{
-    const sym = pos.symbol;
-    const latest = latestMap[sym]||{};
-    const prev   = prevMap[sym]||{};
-    const det    = detailsArr[i]||{};
-    const bars   = barsArr[i]||[];
-    const closes = bars.map(b=>b.c);
+  // 3. Yahoo fundamentals (parallel)
+  const yahooMap={};
+  await Promise.all(syms.map(async s=>{
+    const r=await yFetch(s);
+    yahooMap[s]=r?.quoteSummary?.result?.[0]||{};
+  }));
 
-    const price     = latest.c || pos.avg_cost;
-    const prevClose = prev.c   || price;
-    const change    = price - prevClose;
-    const changePct = prevClose ? change/prevClose*100 : 0;
-    const vol       = latest.v || 0;
-    const mktVal    = price * pos.shares;
-    const costBasis = pos.avg_cost * pos.shares;
-    const gl        = mktVal - costBasis;
-    const glPct     = costBasis ? gl/costBasis*100 : 0;
+  // 4. Enrich
+  data=POSITIONS.map(pos=>{
+    const sym=pos.symbol;
+    const lat=latestMap[sym]||{};
+    const prv=prevMap[sym]||{};
+    const bars=barsMap[sym]||[];
+    const y=yahooMap[sym]||{};
+    const fin=y.financialData||{};
+    const stat=y.defaultKeyStatistics||{};
+    const summ=y.summaryDetail||{};
+    const prc=y.price||{};
 
-    // Indicators
-    const rsiVal  = rsi(closes);
-    const macdVal = macdCross(closes);
+    // Price
+    const price=prc.regularMarketPrice?.raw||lat.c||pos.avg_cost;
+    const prevClose=prc.regularMarketPreviousClose?.raw||prv.c||price;
+    const change=price-prevClose;
+    const changePct=prevClose?change/prevClose*100:0;
+    const vol=lat.v||0;
 
-    // Vol ratio
-    let volRatio = null;
-    if(bars.length>=20){
-      const avg = bars.slice(-20,-1).reduce((s,b)=>s+b.v,0)/19;
-      volRatio = avg>0 ? vol/avg : null;
+    // P&L
+    const mktVal=price*pos.shares;
+    const costBasis=pos.avg_cost*pos.shares;
+    const gl=mktVal-costBasis;
+    const glPct=costBasis?gl/costBasis*100:0;
+
+    // Fundamentals from Yahoo
+    const fwdPe        = summ.forwardPE?.raw||null;
+    const trailPe      = summ.trailingPE?.raw||null;
+    const eps          = stat.trailingEps?.raw||null;
+    const fwdEps       = stat.forwardEps?.raw||null;
+    const epsGrowth    = fin.earningsGrowth?.raw||null;
+    const revGrowth    = fin.revenueGrowth?.raw||null;
+    const bookVal      = stat.bookValue?.raw||null;
+    const debtEq       = stat.debtToEquity?.raw||null;
+    const profitMargin = fin.profitMargins?.raw||null;
+    const roe          = fin.returnOnEquity?.raw||null;
+    const fcf          = fin.freeCashflow?.raw||null;
+    const revenue      = fin.totalRevenue?.raw||null;
+    const analystTarget   = fin.targetMeanPrice?.raw||null;
+    const analystLow      = fin.targetLowPrice?.raw||null;
+    const analystHigh     = fin.targetHighPrice?.raw||null;
+    const analystMedian   = fin.targetMedianPrice?.raw||null;
+    const numAnalysts     = fin.numberOfAnalystOpinions?.raw||null;
+    const recom           = fin.recommendationKey||null;
+    const name            = prc.shortName||prc.longName||sym;
+    const sector          = prc.sector||null; // not in price module usually
+    const profitable      = profitMargin!==null?profitMargin>0:null;
+
+    // ── Valuation ──
+    const growth=(epsGrowth||0)*100;
+    const lynchFair=(eps>0&&growth>0)?eps*growth:null;
+    const lynchDCF=(fwdEps>0&&growth>0)?fwdEps*(8.5+2*growth):null;
+    const graham=(eps>0&&bookVal>0)?Math.sqrt(22.5*eps*bookVal):null;
+    const vals=[lynchFair,lynchDCF,graham,analystMedian].filter(v=>v&&v>0&&v<price*10);
+    const fairValue=vals.length?vals.reduce((a,b)=>a+b)/vals.length:analystMedian;
+    const upside=(fairValue&&price>0)?(fairValue-price)/price*100:null;
+    const bear=analystLow||null;
+    const bull=analystHigh||null;
+    let valVerdict='Unknown';
+    if(upside!==null){
+      if(upside>30)       valVerdict='Great Price';
+      else if(upside>5)   valVerdict='Fair Price';
+      else if(upside>-15) valVerdict='Fairly Priced';
+      else                valVerdict='Expensive';
     }
 
-    // 52W
-    let wk52Pct = null;
-    if(bars.length>0){
-      const h52=Math.max(...bars.map(b=>b.h));
-      const l52=Math.min(...bars.filter(b=>b.l>0).map(b=>b.l));
-      wk52Pct = h52!==l52 ? (price-l52)/(h52-l52)*100 : 50;
+    // ── Story health (long-term lens) ──
+    // Is the company growing revenue, profitable, generating cash?
+    let storyScore=0;
+    if(profitable===true) storyScore++;
+    if(revGrowth>0.05)    storyScore++;
+    if(epsGrowth>0)       storyScore++;
+    if(roe>0.10)          storyScore++;
+    if(debtEq<100)        storyScore++;
+    let storyHealth='Unknown';
+    if(storyScore>=4)      storyHealth='Strong';
+    else if(storyScore>=2) storyHealth='Okay';
+    else if(storyScore>=1) storyHealth='Weak';
+    else                   storyHealth='Unknown';
+
+    // ── Long-term action ──
+    let action='', actionWhy='', actionColor='neu';
+    if(valVerdict==='Great Price'&&storyHealth==='Strong'){
+      action='Consider Adding'; actionColor='up';
+      actionWhy='Strong company trading below fair value — a long-term investor\'s ideal scenario.';
+    } else if(valVerdict==='Expensive'&&storyHealth!=='Strong'){
+      action='Consider Rotating'; actionColor='dn';
+      actionWhy='You\'re paying a lot for a company that isn\'t growing strongly. Could be better deployed elsewhere.';
+    } else if(storyHealth==='Weak'&&glPct<-20){
+      action='Re-evaluate'; actionColor='warn';
+      actionWhy='The company fundamentals are weakening and you\'re down significantly. Ask: has the story changed?';
+    } else if(storyHealth==='Strong'){
+      action='Hold — story intact'; actionColor='up';
+      actionWhy='The business is growing and healthy. Short-term price moves don\'t matter for a 10-year holder.';
+    } else {
+      action='Monitor'; actionColor='neu';
+      actionWhy='No urgent action needed. Keep watching the fundamentals each quarter.';
     }
 
-    // From Polygon reference (limited financials on free tier — we compute ourselves)
-    // Use det for name only; compute valuation from bars data
-    const name = det.name || sym;
+    // ── Plain english explain ──
+    const explains=[];
 
-    // We'll use placeholder fundamentals — enriched below via Yahoo fallback
-    const fwdPe   = null;
-    const eps     = null;
-    const fwdEps  = null;
-    const epsGrowth = null;
-    const bookVal = null;
-    const analystTarget = null;
-    const debtEq  = null;
-    const profitMargin = null;
-    const profitable = null;
+    // What the company does (we'll map common ones)
+    const bizDesc=BIZ[sym]||null;
 
-    const val = computeValuation(price, eps, fwdEps, epsGrowth, bookVal, analystTarget);
-    const rot = rotationSignal(pos, price, val, fwdPe, epsGrowth, rsiVal, macdVal, debtEq);
+    // Valuation explain
+    if(upside!==null){
+      if(upside>20) explains.push(`💡 <b>Looks cheap:</b> Analysts think this stock is worth ~$${fairValue?.toFixed(0)} on average. At today's price of $${price.toFixed(2)}, you're getting it at a ${upside.toFixed(0)}% discount. For a long-term holder, that's a good entry.`);
+      else if(upside<-20) explains.push(`⚠️ <b>Looks expensive:</b> The stock trades ${Math.abs(upside).toFixed(0)}% above where analysts think it's fairly valued. That doesn't mean sell — but don't add more at this price.`);
+    }
+
+    // Growth explain
+    if(revGrowth!==null){
+      if(revGrowth>0.2) explains.push(`🚀 <b>Fast growing:</b> Revenue is growing ${(revGrowth*100).toFixed(0)}% year over year. This is the type of growth that compoundsover 10 years.`);
+      else if(revGrowth<0) explains.push(`📉 <b>Shrinking revenue:</b> Revenue is actually declining (${(revGrowth*100).toFixed(0)}%). Worth watching — great companies don't shrink for long.`);
+    }
+
+    // Profitability explain
+    if(profitable===false) explains.push(`🔴 <b>Not yet profitable:</b> This company is still losing money. That's okay for high-growth companies, but you want to see a path to profitability.`);
+    if(profitable===true&&profitMargin>0.15) explains.push(`✅ <b>Very profitable:</b> Keeping ${(profitMargin*100).toFixed(0)}¢ of every dollar in revenue as profit. That's a healthy, durable business.`);
+
+    // Debt explain
+    if(debtEq!==null&&debtEq>150) explains.push(`⚡ <b>High debt:</b> Debt is ${debtEq.toFixed(0)}% of equity. This isn't necessarily bad, but in a recession high-debt companies struggle more. Worth keeping an eye on.`);
+
+    // Your position
+    if(glPct>50) explains.push(`🏆 <b>Big winner for you:</b> You're up ${glPct.toFixed(0)}% on this position. At some point it's worth asking: does this one position now represent too much of your portfolio?`);
+    if(glPct<-30) explains.push(`📌 <b>Down ${Math.abs(glPct).toFixed(0)}% from your cost:</b> That's uncomfortable, but for a long-term investor the question isn't "am I down?" — it's "is the company still on the right track?" If yes, this could be an opportunity to average down.`);
+
+    // Analyst consensus
+    if(recom==='strongBuy'||recom==='buy') explains.push(`👍 <b>Wall Street likes it:</b> ${numAnalysts||'Multiple'} analysts cover this stock and the consensus is Buy. Analyst targets average $${analystTarget?.toFixed(0)}.`);
+    else if(recom==='sell'||recom==='underperform') explains.push(`👎 <b>Wall Street is cautious:</b> Analysts have a sell/underperform rating. Worth understanding why before holding long-term.`);
 
     return {
-      ...pos, name, price, prevClose, change, changePct, vol, volRatio,
-      mktVal, costBasis, gl, glPct, rsiVal, macdVal, wk52Pct,
-      fwdPe, eps, fwdEps, epsGrowth, bookVal, analystTarget, debtEq,
-      profitMargin, profitable, val, rot, bars,
+      ...pos,sym:sym,name,price,prevClose,change,changePct,vol,
+      mktVal,costBasis,gl,glPct,bars,profitable,profitMargin,
+      fwdPe,trailPe,eps,fwdEps,epsGrowth,revGrowth,bookVal,
+      debtEq,roe,fcf,revenue,recom,numAnalysts,
+      analystTarget,analystLow,analystHigh,analystMedian,
+      fairValue,upside,bear,bull,valVerdict,
+      storyScore,storyHealth,action,actionWhy,actionColor,
+      bizDesc,explains,lynchFair,lynchDCF,graham,
     };
   });
 
-  // Step 4: Enrich fundamentals via Yahoo Finance (CORS-friendly public endpoint)
-  await enrichFundamentals();
+  document.getElementById('dot').className='dot live';
+  document.getElementById('ts').textContent=new Date().toLocaleTimeString();
+  document.getElementById('hd-meta').textContent=isMarketOpen()?'🟢 Market open · 15-min delay':'🔴 Market closed · Last session data';
 
-  document.getElementById('dot').className = 'dot live';
-  document.getElementById('last-ts').textContent = new Date().toLocaleTimeString();
-  document.getElementById('hd-sub').textContent = isMarketOpen() ? '🟢 Market open · 15-min delayed' : '🔴 Market closed · Last session';
-
-  renderSummary();
-  renderRotateBar();
-  renderTable();
-  if(selectedSym) openDrawer(selectedSym);
+  renderHero();
+  renderInsights();
+  renderStocks();
 }
 
-async function enrichFundamentals() {
-  // Use Yahoo Finance v8 (public, no auth needed)
-  await Promise.all(enriched.map(async (row) => {
-    try {
-      const url = `https://query1.finance.yahoo.com/v8/finance/chart/${row.symbol}?interval=1d&range=1d`;
-      const r = await fetch(url, {headers:{'Accept':'application/json'}});
-      if(!r.ok) return;
-      const d = await r.json();
-      const meta = d?.chart?.result?.[0]?.meta || {};
-      // Yahoo gives us more price data
-      if(meta.regularMarketPrice) row.price = meta.regularMarketPrice;
-      if(meta.previousClose) row.prevClose = meta.previousClose;
-      row.change = row.price - row.prevClose;
-      row.changePct = row.prevClose ? row.change/row.prevClose*100 : 0;
-    } catch(e){}
-  }));
+// ─── BIZ DESCRIPTIONS ─────────────────────────────────────────
+const BIZ={
+  AMD:  "Makes the chips that power gaming, AI servers, and data centers. Direct competitor to NVIDIA.",
+  NBIS: "Nebius — an AI cloud infrastructure company spun out of Yandex. Early stage, high risk/reward.",
+  INTC: "Intel — the original chip giant, now fighting to stay relevant in AI and manufacturing.",
+  RDDT: "Reddit — the social platform. Still figuring out how to monetize its massive user base.",
+  VRT:  "Vertiv — makes the power and cooling systems that data centers need to run AI. Picks-and-shovels AI play.",
+  JNJ:  "Johnson & Johnson — pharmaceutical and MedTech giant. Slow and steady, pays dividends.",
+  TMUS: "T-Mobile — the fastest-growing major US wireless carrier.",
+  MU:   "Micron — makes memory chips (DRAM, NAND). Cyclical business, but AI is driving huge demand.",
+  PTRN: "Palantron — check your position details.",
+  KLAR: "Klarna — the buy-now-pay-later fintech. Recently went public.",
+  GEMI: "Gemini-related crypto/fintech — check your position details.",
+  IBM:  "IBM — enterprise tech and AI consulting (Watson). Reinventing itself around hybrid cloud.",
+  OPEN: "Opendoor — buys and sells homes directly. Risky business model highly sensitive to interest rates.",
+};
 
-  // Yahoo Finance v10 for fundamentals
-  await Promise.all(enriched.map(async (row) => {
-    try {
-      const url = `https://query1.finance.yahoo.com/v10/finance/quoteSummary/${row.symbol}?modules=defaultKeyStatistics,financialData,summaryDetail`;
-      const r = await fetch(url, {headers:{'Accept':'application/json'}});
-      if(!r.ok) return;
-      const d = await r.json();
-      const fin  = d?.quoteSummary?.result?.[0]?.financialData || {};
-      const stat = d?.quoteSummary?.result?.[0]?.defaultKeyStatistics || {};
-      const summ = d?.quoteSummary?.result?.[0]?.summaryDetail || {};
+// ─── RENDER HERO ──────────────────────────────────────────────
+function renderHero(){
+  let tv=0,tc=0,td=0;
+  data.forEach(r=>{tv+=r.mktVal;tc+=r.costBasis;td+=r.change*r.shares;});
+  const gl=tv-tc,glp=tc?gl/tc*100:0,dayp=tv?td/tv*100:0;
+  const glC=gl>=0?'up':'dn',glS=gl>=0?'+':'';
+  const dC=td>=0?'up':'dn',dS=td>=0?'+':'';
 
-      row.fwdPe          = fin.currentPrice?.raw && fin.targetMeanPrice?.raw ? null : (summ.forwardPE?.raw || null);
-      row.fwdPe          = summ.forwardPE?.raw || null;
-      row.eps            = stat.trailingEps?.raw || null;
-      row.fwdEps         = stat.forwardEps?.raw  || null;
-      row.epsGrowth      = fin.earningsGrowth?.raw || null;
-      row.revenueGrowth  = fin.revenueGrowth?.raw  || null;
-      row.bookVal        = stat.bookValue?.raw  || null;
-      row.analystTarget  = fin.targetMeanPrice?.raw  || null;
-      row.targetLow      = fin.targetLowPrice?.raw   || null;
-      row.targetHigh     = fin.targetHighPrice?.raw  || null;
-      row.targetMedian   = fin.targetMedianPrice?.raw|| null;
-      row.debtEq         = stat.debtToEquity?.raw || null;
-      row.profitMargin   = fin.profitMargins?.raw || null;
-      row.profitable     = row.profitMargin !== null ? row.profitMargin > 0 : null;
-      row.roe            = fin.returnOnEquity?.raw || null;
-      row.revenuePerShare= fin.revenuePerShare?.raw || null;
+  document.getElementById('h-val').textContent='$'+fmt(tv);
+  document.getElementById('h-gl').className='change '+glC;
+  document.getElementById('h-gl').textContent=glS+'$'+fmt(Math.abs(gl))+' ('+glS+glp.toFixed(1)+'%) all time';
+  document.getElementById('h-day').textContent=dS+'$'+fmt(Math.abs(td))+' today ('+dS+dayp.toFixed(2)+'%)';
+  document.getElementById('h-day').className='sub '+dC;
+  document.getElementById('hc-cost').textContent='$'+fmt(tc);
 
-      // Recompute valuation with real data
-      row.val = computeValuation(row.price, row.eps, row.fwdEps, row.epsGrowth, row.bookVal, row.analystTarget);
-      // Override bear/bull with analyst low/high if available
-      if(row.targetLow)  row.val.bear = row.targetLow;
-      if(row.targetHigh) row.val.bull = row.targetHigh;
-      if(row.targetMedian) row.val.fairValue = row.targetMedian;
+  const ups=data.map(r=>r.upside).filter(v=>v!=null);
+  const avgUp=ups.length?ups.reduce((a,b)=>a+b)/ups.length:null;
+  const upEl=document.getElementById('hc-up');
+  upEl.textContent=avgUp!=null?(avgUp>=0?'+':'')+avgUp.toFixed(1)+'%':'—';
+  upEl.className='val2 '+(avgUp>0?'up':avgUp<0?'dn':'neu');
 
-      // Recompute rotation with real data
-      row.rot = rotationSignal(row, row.price, row.val, row.fwdPe, row.epsGrowth, row.rsiVal, row.macdVal, row.debtEq);
+  const profCount=data.filter(r=>r.profitable===true).length;
+  document.getElementById('hc-prof').textContent=profCount+' / '+data.length;
 
-      // Mkt val update
-      row.mktVal = row.price * row.shares;
-      row.gl = row.mktVal - row.costBasis;
-      row.glPct = row.costBasis ? row.gl/row.costBasis*100 : 0;
+  const storyCount=data.filter(r=>r.storyHealth==='Strong'||r.storyHealth==='Okay').length;
+  document.getElementById('hc-story').textContent=storyCount+' / '+data.length;
 
-    } catch(e){}
-  }));
+  const best=[...data].sort((a,b)=>b.glPct-a.glPct)[0];
+  if(best){document.getElementById('hc-best').textContent=best.sym;document.getElementById('hc-best-s').textContent='+'+best.glPct.toFixed(0)+'% return';}
 }
 
-// ─── RENDER SUMMARY ───────────────────────────────────────────────────────────
-function renderSummary() {
-  let totalVal=0, totalCost=0, totalDay=0;
-  enriched.forEach(r=>{ totalVal+=r.mktVal; totalCost+=r.costBasis; totalDay+=r.change*r.shares; });
-  const gl=totalVal-totalCost, glp=totalCost?gl/totalCost*100:0;
-  const dayp=totalVal?totalDay/totalVal*100:0;
+// ─── RENDER INSIGHTS ──────────────────────────────────────────
+function renderInsights(){
+  const cards=[];
 
-  const glC=gl>=0?'up':'dn', dayC=totalDay>=0?'up':'dn';
-  const glS=gl>=0?'+':'', dayS=totalDay>=0?'+':'';
+  // Long-term framing card
+  cards.push({color:'blue',icon:'🕐',title:'You\'re a long-term investor — here\'s what actually matters',text:'Day-to-day price moves are noise. What matters over 5-15 years: Is the company growing revenue? Is it profitable (or on a path to be)? Is management allocating capital well? Is the stock reasonably priced relative to its future earnings? Use this dashboard to answer those 4 questions — not to react to daily swings.'});
 
-  set('s-val', '$'+fmt(totalVal));
-  set('s-gl',  glS+'$'+fmt(Math.abs(gl)), glC);
-  set('s-glp', glS+glp.toFixed(2)+'%', glC);
-  set('s-day', dayS+'$'+fmt(Math.abs(totalDay)), dayC);
-  set('s-dayp', dayS+dayp.toFixed(2)+'%', dayC);
-  set('s-pos', POSITIONS.length+' positions');
+  // Portfolio-level insight
+  const weakStories=data.filter(r=>r.storyHealth==='Weak').map(r=>r.sym);
+  if(weakStories.length>0){
+    cards.push({color:'yellow',icon:'⚠️',title:`${weakStories.length} positions have weakening fundamentals`,text:`${weakStories.join(', ')} — these companies are showing signs of slowing growth or declining profitability. That doesn't mean sell today, but it means asking: has the story changed from when you bought? If yes, there may be better places to put this capital.`});
+  }
 
-  // Avg upside
-  const upsides = enriched.map(r=>r.val.upside).filter(v=>v!=null);
-  const avgUp = upsides.length ? upsides.reduce((a,b)=>a+b,0)/upsides.length : null;
-  set('s-upside', avgUp!=null ? (avgUp>=0?'+':'')+avgUp.toFixed(1)+'%' : '—', avgUp>0?'up':avgUp<0?'dn':'neu');
+  // Concentration risk
+  const totalVal=data.reduce((s,r)=>s+r.mktVal,0);
+  const bigPos=data.filter(r=>r.mktVal/totalVal>0.15).sort((a,b)=>b.mktVal-a.mktVal);
+  if(bigPos.length>0){
+    const bp=bigPos[0];
+    const bpPct=(bp.mktVal/totalVal*100).toFixed(0);
+    cards.push({color:'yellow',icon:'📊',title:`${bp.sym} is ${bpPct}% of your portfolio`,text:`Heavy concentration in one stock increases risk. If ${bp.sym} drops 40%, your whole portfolio feels it hard. Consider whether that concentration is intentional — if you have very high conviction, fine. If not, trimming and spreading into your other positions adds stability.`});
+  }
 
-  // Alerts
-  const sellCount = enriched.filter(r=>r.rot.score<=-1).length;
-  set('s-alerts', sellCount+' stocks', sellCount>0?'dn':'neu');
+  // Cheap + strong story
+  const goodBuys=data.filter(r=>r.valVerdict==='Great Price'&&r.storyHealth==='Strong');
+  if(goodBuys.length>0){
+    cards.push({color:'green',icon:'💡',title:`${goodBuys.map(r=>r.sym).join(', ')} — strong company at a discount`,text:`These positions have strong fundamentals AND are trading below fair value estimates. For a long-term investor, that combination is rare and worth paying attention to. If you have conviction in the story, pullbacks like this are historically good times to add.`});
+  }
+
+  // Market closed context
+  if(!isMarketOpen()){
+    cards.push({color:'gray',icon:'🌙',title:'Market is closed — good time to think, not react',text:'The best long-term investment decisions are made when the market is closed and you\'re thinking clearly. Use this time to review each company\'s story, not their stock price.'});
+  }
+
+  document.getElementById('insight-grid').innerHTML=cards.map(c=>`
+    <div class="icard ${c.color}">
+      <div class="icard-icon">${c.icon}</div>
+      <div class="icard-body">
+        <div class="title">${c.title}</div>
+        <div class="text">${c.text}</div>
+      </div>
+    </div>`).join('');
 }
 
-// ─── RENDER ROTATE BAR ────────────────────────────────────────────────────────
-function renderRotateBar() {
-  const pills = [];
-  enriched.filter(r=>r.rot.score!==0).sort((a,b)=>a.rot.score-b.rot.score).forEach(r=>{
-    const top = r.rot.signals[0];
-    const cls = top.type==='sell'?'rpill-sell':top.type==='buy'?'rpill-buy':'rpill-watch';
-    const icon = top.type==='sell'?'↓':top.type==='buy'?'↑':'●';
-    pills.push(`<div class="rpill ${cls}" onclick="selectRow('${r.symbol}')">${icon} ${r.symbol}: ${top.text}</div>`);
-  });
-  document.getElementById('rotate-bar').innerHTML = pills.join('');
-}
+// ─── RENDER STOCKS ────────────────────────────────────────────
+function renderStocks(){
+  const sorted=[...data].sort((a,b)=>b.mktVal-a.mktVal);
+  document.getElementById('stock-grid').innerHTML=sorted.map(r=>{
+    const dayC=r.change>=0?'up':'dn',dayS=r.change>=0?'+':'';
+    const glC=r.gl>=0?'up':'dn',glS=r.gl>=0?'+':'';
 
-// ─── RENDER TABLE ─────────────────────────────────────────────────────────────
-function renderTable() {
-  const rows = [...enriched].sort((a,b)=>{
-    let av=a[sortCol]??-Infinity, bv=b[sortCol]??-Infinity;
-    if(typeof av==='string') return sortDir*av.localeCompare(bv);
-    return sortDir*(av-bv);
-  });
+    // Story dot
+    const dotColor=r.storyHealth==='Strong'?'#22c55e':r.storyHealth==='Okay'?'#f59e0b':r.storyHealth==='Weak'?'#ef4444':'#ccc';
 
-  document.getElementById('tbody').innerHTML = rows.map(r=>{
-    const dayC = r.change>=0?'up':'dn', dayS=r.change>=0?'+':'';
-    const glC  = r.gl>=0?'up':'dn',   glS=r.gl>=0?'+':'';
+    // Verdict tag
+    const vmap={'Great Price':'v-great','Fair Price':'v-fair','Fairly Priced':'v-fair','Expensive':'v-pricey','Unknown':'v-na'};
+    const vtag=`<span class="verdict-tag ${vmap[r.valVerdict]||'v-na'}">${r.valVerdict}</span>`;
 
-    // Profitability badge
-    let profHtml = '<span class="prof prof-na">N/A</span>';
-    if(r.profitable===true)  profHtml='<span class="prof prof-yes">✓ Yes</span>';
-    if(r.profitable===false) profHtml='<span class="prof prof-no">✗ No</span>';
+    const actionC=r.actionColor==='up'?'up':r.actionColor==='dn'?'dn':r.actionColor==='warn'?'warn':'neu';
 
-    // Valuation badge
-    const vmap = {Cheap:'vb-cheap',Fair:'vb-fair',Pricey:'vb-pricey',Rich:'vb-rich','N/A':'vb-na'};
-    const vbadge = `<span class="vbadge ${vmap[r.val.verdict]||'vb-na'}">${r.val.verdict}</span>`;
-
-    // Fair value with upside
-    let fairHtml = '—';
-    if(r.val.fairValue) {
-      const up = r.val.upside;
-      const upC = up>=0?'up':'dn', upS=up>=0?'+':'';
-      fairHtml = `$${r.val.fairValue.toFixed(2)} <span class="${upC}" style="font-size:.7rem">${upS}${up?.toFixed(0)}%</span>`;
-    }
-
-    // Bear → Bull mini range
-    let rangeHtml = '—';
-    if(r.val.bear && r.val.bull) {
-      const range = r.val.bull - r.val.bear;
-      const pos = range>0 ? Math.min(100,Math.max(0,(r.price-r.val.bear)/range*100)) : 50;
-      rangeHtml = `
-        <div style="display:flex;align-items:center;gap:.35rem;font-size:.7rem">
-          <span class="dn">$${r.val.bear.toFixed(0)}</span>
-          <div style="width:50px;height:5px;background:#f0f0f0;border-radius:3px;position:relative;flex-shrink:0">
-            <div style="position:absolute;left:${pos}%;top:-2px;width:3px;height:9px;background:#111;border-radius:2px;transform:translateX(-50%)"></div>
+    return `<div class="srow ${openSym===r.sym?'open':''}" id="row-${r.sym}">
+      <div class="srow-top" onclick="toggleRow('${r.sym}')">
+        <div class="stk-name">
+          <div class="sym">${r.sym}</div>
+          <div class="nm">${(r.name||r.sym).substring(0,24)}</div>
+        </div>
+        <div class="stk-price">
+          <div class="p">$${r.price.toFixed(2)}</div>
+          <div class="chg ${dayC}">${dayS}${r.changePct.toFixed(2)}% today</div>
+        </div>
+        <div class="stk-gl">
+          <div class="pct ${glC}">${glS}${r.glPct.toFixed(1)}%</div>
+          <div class="abs">${glS}$${fmt(Math.abs(r.gl))} on investment</div>
+        </div>
+        <div class="story">
+          <div class="story-dot" style="background:${dotColor}"></div>
+          <div>
+            <div class="story-text">${r.storyHealth==='Unknown'?'No data':r.storyHealth+' fundamentals'}</div>
+            <div style="font-size:.68rem;color:#aaa;margin-top:.1rem">${r.profitable===true?'✓ Profitable':r.profitable===false?'✗ Not profitable yet':'—'}</div>
           </div>
-          <span class="up">$${r.val.bull.toFixed(0)}</span>
-        </div>`;
-    }
-
-    // Rotation
-    const top = r.rot.signals[0];
-    const rotC = top.type==='sell'?'dn':top.type==='buy'?'up':'neu';
-    const rotIcon = top.type==='sell'?'↓ ':top.type==='buy'?'↑ ':'';
-
-    const selCls = selectedSym===r.symbol?'sel':'';
-
-    return `<tr class="${selCls}" onclick="selectRow('${r.symbol}')">
-      <td>
-        <div class="sym">${r.symbol}</div>
-        <div class="name-s">${(r.name||r.symbol).substring(0,20)}</div>
-      </td>
-      <td>$${(r.price||0).toFixed(2)}</td>
-      <td class="${dayC}">${dayS}${(r.changePct||0).toFixed(2)}%</td>
-      <td class="${glC}">${glS}${r.glPct.toFixed(1)}%</td>
-      <td>$${fmt(r.mktVal)}</td>
-      <td>${profHtml}</td>
-      <td>${r.fwdPe!=null?r.fwdPe.toFixed(1):'—'}</td>
-      <td>${fairHtml}</td>
-      <td>${vbadge}</td>
-      <td>${rangeHtml}</td>
-      <td class="${rotC}" style="font-size:.75rem">${rotIcon}${top.text}</td>
-    </tr>`;
+        </div>
+        <div class="verdict-wrap" style="padding-left:.5rem">
+          ${vtag}
+          <div style="font-size:.68rem;color:#aaa;margin-top:.3rem">${r.upside!=null?(r.upside>=0?'↑ +':'↓ ')+r.upside.toFixed(0)+'% to fair value':'No target data'}</div>
+        </div>
+        <div class="action-wrap">
+          <div class="action-main ${actionC}">${r.action}</div>
+          <div class="action-sub">${r.actionWhy.substring(0,70)}…</div>
+        </div>
+      </div>
+      <div class="srow-detail" id="det-${r.sym}" style="display:none"></div>
+    </div>`;
   }).join('');
 }
 
-// ─── DETAIL DRAWER ────────────────────────────────────────────────────────────
-function selectRow(sym) {
-  if(selectedSym===sym){ selectedSym=null; closeDrawer(); renderTable(); return; }
-  selectedSym = sym;
-  renderTable();
-  openDrawer(sym);
+// ─── TOGGLE ROW ───────────────────────────────────────────────
+function toggleRow(sym){
+  if(openSym===sym){ openSym=null; document.getElementById('det-'+sym).style.display='none'; document.getElementById('row-'+sym).classList.remove('open'); return; }
+  if(openSym){ document.getElementById('det-'+openSym).style.display='none'; document.getElementById('row-'+openSym).classList.remove('open'); }
+  openSym=sym;
+  document.getElementById('row-'+sym).classList.add('open');
+  buildDrawer(sym);
+  document.getElementById('det-'+sym).style.display='grid';
+  setTimeout(()=>document.getElementById('row-'+sym).scrollIntoView({behavior:'smooth',block:'nearest'}),50);
 }
 
-function closeDrawer() {
-  document.getElementById('drawer').style.display='none';
-}
-
-function openDrawer(sym) {
-  const r = enriched.find(x=>x.symbol===sym);
+function buildDrawer(sym){
+  const r=data.find(x=>x.sym===sym);
   if(!r) return;
+  const det=document.getElementById('det-'+sym);
+  const v=r;
+  const chartId='ch-'+sym;
 
-  const v = r.val;
-  const bars = r.bars||[];
-
-  // Price range bar
-  const hasRange = v.bear && v.bull;
-  const rangeSpan = hasRange ? v.bull-v.bear : 0;
-  const bearPos   = 0;
-  const fairPos   = hasRange ? Math.min(98,Math.max(2,(v.fairValue-v.bear)/rangeSpan*100)) : 50;
-  const bullPos   = 100;
-  const currPos   = hasRange ? Math.min(98,Math.max(2,(r.price-v.bear)/rangeSpan*100)) : 50;
-
-  const priceRangeHtml = hasRange ? `
-    <div style="margin:1rem 0">
-      <div style="position:relative;height:8px;background:linear-gradient(to right,#fee2e2,#fef9c3,#dcfce7);border-radius:4px">
-        <div style="position:absolute;left:${currPos}%;top:-4px;width:4px;height:16px;background:#111;border-radius:2px;transform:translateX(-50%)" title="Current: $${r.price.toFixed(2)}"></div>
+  // Bear-bull range
+  let bbHtml='<div style="color:#ccc;font-size:.78rem">No analyst targets available yet</div>';
+  if(r.bear&&r.bull){
+    const span=r.bull-r.bear;
+    const pos=span>0?Math.min(96,Math.max(4,(r.price-r.bear)/span*100)):50;
+    const fairPos=span>0&&r.fairValue?Math.min(96,Math.max(4,(r.fairValue-r.bear)/span*100)):50;
+    bbHtml=`<div class="bbrange">
+      <div class="bbrange-bar">
+        <div class="bbrange-dot" style="left:${pos}%" title="Current price $${r.price.toFixed(2)}"></div>
       </div>
-      <div style="display:flex;justify-content:space-between;font-size:.7rem;margin-top:.35rem">
-        <span class="dn">Bear $${v.bear.toFixed(2)}</span>
-        <span style="color:#888">Fair $${(v.fairValue||0).toFixed(2)}</span>
-        <span class="up">Bull $${v.bull.toFixed(2)}</span>
+      <div class="bbrange-labels">
+        <span class="dn">Bear $${r.bear.toFixed(0)}</span>
+        <span style="color:#888">Fair ~$${(r.fairValue||0).toFixed(0)}</span>
+        <span class="up">Bull $${r.bull.toFixed(0)}</span>
       </div>
-    </div>` : '<div style="color:#aaa;font-size:.78rem">Insufficient data for range</div>';
+      <div style="font-size:.72rem;color:#888;margin-top:.4rem">The black line is where the stock trades today. Bear/Bull are analyst low/high targets.</div>
+    </div>`;
+  }
 
-  // Signals
-  const sigsHtml = r.rot.signals.map(s=>{
-    const cls = s.type==='sell'?'rot-sell':s.type==='buy'?'rot-buy':'rot-hold';
-    const icon = s.type==='sell'?'↓':s.type==='buy'?'↑':'●';
-    return `<div class="rot-item ${cls}"><div class="rot-name">${icon} ${s.text}</div><div class="rot-why">${s.why}</div></div>`;
-  }).join('');
+  // Explains
+  const exHtml=r.explains.length?r.explains.map(e=>`<div style="padding:.5rem 0;border-bottom:1px solid #f5f5f5;font-size:.79rem;color:#444;line-height:1.6">${e}</div>`).join(''):`<div style="color:#aaa;font-size:.78rem">Insufficient fundamental data to generate insights.</div>`;
 
-  const chartId = 'dc-'+sym;
-
-  document.getElementById('drawer-inner').innerHTML = `
-    <div class="drawer-section">
-      <h4>${r.symbol} — ${r.name||sym}</h4>
-      <div class="drow"><span class="dlbl">Current Price</span><span class="dval">$${r.price.toFixed(2)}</span></div>
-      <div class="drow"><span class="dlbl">My Avg Cost</span><span class="dval">$${r.avg_cost.toFixed(2)}</span></div>
-      <div class="drow"><span class="dlbl">My Gain/Loss</span><span class="dval ${r.gl>=0?'up':'dn'}">${r.gl>=0?'+':''}$${fmt(Math.abs(r.gl))} (${r.gl>=0?'+':''}${r.glPct.toFixed(1)}%)</span></div>
-      <div class="drow"><span class="dlbl">Position Value</span><span class="dval">$${fmt(r.mktVal)}</span></div>
-      <div class="drow"><span class="dlbl">Forward P/E</span><span class="dval">${r.fwdPe!=null?r.fwdPe.toFixed(1):'—'}</span></div>
-      <div class="drow"><span class="dlbl">EPS Growth</span><span class="dval">${r.epsGrowth!=null?(r.epsGrowth*100).toFixed(1)+'%':'—'}</span></div>
-      <div class="drow"><span class="dlbl">Revenue Growth</span><span class="dval">${r.revenueGrowth!=null?(r.revenueGrowth*100).toFixed(1)+'%':'—'}</span></div>
-      <div class="drow"><span class="dlbl">Profit Margin</span><span class="dval ${r.profitMargin>0?'up':r.profitMargin<0?'dn':''}">${r.profitMargin!=null?(r.profitMargin*100).toFixed(1)+'%':'—'}</span></div>
-      <div class="drow"><span class="dlbl">RSI (14)</span><span class="dval ${r.rsiVal>70?'dn':r.rsiVal<30?'up':''}">${r.rsiVal??'—'}</span></div>
-      <div class="drow"><span class="dlbl">MACD</span><span class="dval ${r.macdVal==='bullish'?'up':r.macdVal==='bearish'?'dn':''}">${r.macdVal||'—'}</span></div>
+  det.innerHTML=`
+    <div class="det-section">
+      <h4>What does ${sym} do?</h4>
+      <div style="font-size:.82rem;color:#444;line-height:1.6;margin-bottom:.75rem">${r.bizDesc||'Business description not available.'}</div>
+      <h4 style="margin-top:.75rem">Key numbers</h4>
+      <div class="det-row"><span class="det-lbl">Your avg cost</span><span class="det-val">$${r.avg_cost.toFixed(2)}</span></div>
+      <div class="det-row"><span class="det-lbl">Current price</span><span class="det-val">$${r.price.toFixed(2)}</span></div>
+      <div class="det-row"><span class="det-lbl">Your return</span><span class="det-val ${r.gl>=0?'up':'dn'}">${r.gl>=0?'+':''}${r.glPct.toFixed(1)}%</span></div>
+      <div class="det-row"><span class="det-lbl">Position value</span><span class="det-val">$${fmt(r.mktVal)}</span></div>
+      <div class="det-row"><span class="det-lbl">Forward P/E</span><span class="det-val">${r.fwdPe!=null?r.fwdPe.toFixed(1)+'x — '+(r.fwdPe<20?'reasonable':'high for a long-term buy'):'—'}</span></div>
+      <div class="det-row"><span class="det-lbl">Revenue growth</span><span class="det-val ${r.revGrowth>0?'up':'dn'}">${r.revGrowth!=null?(r.revGrowth*100).toFixed(1)+'% YoY':'—'}</span></div>
+      <div class="det-row"><span class="det-lbl">Profit margin</span><span class="det-val ${r.profitMargin>0?'up':'dn'}">${r.profitMargin!=null?(r.profitMargin*100).toFixed(1)+'%':'—'}</span></div>
+      <div class="det-row"><span class="det-lbl">Return on equity</span><span class="det-val">${r.roe!=null?(r.roe*100).toFixed(1)+'%':'—'}</span></div>
+      <div class="det-row"><span class="det-lbl">Debt / Equity</span><span class="det-val ${r.debtEq>150?'warn':''}">${r.debtEq!=null?r.debtEq.toFixed(0)+'%':'—'}</span></div>
+      <div class="det-row"><span class="det-lbl">Analyst consensus</span><span class="det-val">${r.recom?r.recom.replace('strongBuy','Strong Buy').replace('strongSell','Strong Sell'):' —'} ${r.numAnalysts?'('+r.numAnalysts+' analysts)':''}</span></div>
     </div>
 
-    <div class="drawer-section">
-      <h4>Valuation</h4>
-      <div class="drow"><span class="dlbl">Lynch Fair Value</span><span class="dval">${v.lynchFair?'$'+v.lynchFair.toFixed(2):'—'}</span></div>
-      <div class="drow"><span class="dlbl">Lynch DCF</span><span class="dval">${v.lynchDCF?'$'+v.lynchDCF.toFixed(2):'—'}</span></div>
-      <div class="drow"><span class="dlbl">Graham Number</span><span class="dval">${v.graham?'$'+v.graham.toFixed(2):'—'}</span></div>
-      <div class="drow"><span class="dlbl">Analyst Target</span><span class="dval">${v.analystTarget?'$'+v.analystTarget.toFixed(2):'—'}</span></div>
-      <div class="drow" style="border-top:2px solid #eee;margin-top:.25rem;padding-top:.5rem"><span class="dlbl" style="font-weight:600">Fair Value Est.</span><span class="dval" style="font-size:1rem">${v.fairValue?'$'+v.fairValue.toFixed(2):'—'}</span></div>
-      <div class="drow"><span class="dlbl">Upside to Fair</span><span class="dval ${v.upside>=0?'up':'dn'}">${v.upside!=null?(v.upside>=0?'+':'')+v.upside.toFixed(1)+'%':'—'}</span></div>
-      <div style="margin-top:.75rem"><div style="font-size:.68rem;color:#aaa;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.4rem">Bear → Current → Bull</div>${priceRangeHtml}</div>
+    <div class="det-section">
+      <h4>Is the price right? (Fair Value)</h4>
+      <div class="det-row"><span class="det-lbl">Lynch formula</span><span class="det-val">${r.lynchFair?'$'+r.lynchFair.toFixed(2):'Need earnings growth data'}</span></div>
+      <div class="det-row"><span class="det-lbl">Lynch DCF</span><span class="det-val">${r.lynchDCF?'$'+r.lynchDCF.toFixed(2):'Need fwd EPS + growth'}</span></div>
+      <div class="det-row"><span class="det-lbl">Graham Number</span><span class="det-val">${r.graham?'$'+r.graham.toFixed(2):'Need EPS + book value'}</span></div>
+      <div class="det-row"><span class="det-lbl">Analyst target</span><span class="det-val">${r.analystTarget?'$'+r.analystTarget.toFixed(2):'—'}</span></div>
+      <div class="det-row" style="border-top:2px solid #eee;margin-top:.2rem;padding-top:.5rem"><span class="det-lbl" style="font-weight:600">Our fair value est.</span><span class="det-val" style="font-size:1rem">${r.fairValue?'$'+r.fairValue.toFixed(2):'Not enough data'}</span></div>
+      <div class="det-row"><span class="det-lbl">Upside / downside</span><span class="det-val ${r.upside>=0?'up':'dn'}">${r.upside!=null?(r.upside>=0?'+':'')+r.upside.toFixed(1)+'%':'—'}</span></div>
+      <div style="margin-top:.75rem"><div style="font-size:.68rem;color:#bbb;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.4rem">Analyst price range</div>${bbHtml}</div>
     </div>
 
-    <div class="drawer-section">
-      <h4>Rotate? ${r.rot.score>0?'🟢 Lean Hold/Add':r.rot.score<-1?'🔴 Consider Rotating':'🟡 Monitor'}</h4>
-      <div class="rot-box">${sigsHtml}</div>
+    <div class="det-section">
+      <h4>What the data is telling you</h4>
+      <div>${exHtml}</div>
       <div style="margin-top:1rem">
-        <div style="font-size:.68rem;color:#aaa;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.4rem">3-Month Chart</div>
-        <canvas id="${chartId}" height="140"></canvas>
+        <div style="font-size:.68rem;color:#bbb;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.4rem">1-Year Price Chart</div>
+        <canvas id="${chartId}" height="130"></canvas>
       </div>
-    </div>
-  `;
+    </div>`;
 
-  document.getElementById('drawer').style.display = 'block';
-  document.getElementById('drawer').scrollIntoView({behavior:'smooth', block:'nearest'});
-
-  // Draw chart
+  // Chart
   setTimeout(()=>{
-    const canvas = document.getElementById(chartId);
-    if(!canvas || bars.length<2) return;
-    const recent = bars.slice(-65);
-    const labels = recent.map(b=>{ const d=new Date(b.t); return d.toLocaleDateString('en-US',{month:'short',day:'numeric'}); });
-    const prices = recent.map(b=>b.c);
-    const isUp = prices[prices.length-1]>=prices[0];
-    const color = isUp?'#16a34a':'#dc2626';
-    if(priceChart) priceChart.destroy();
-    priceChart = new Chart(canvas,{
+    const canvas=document.getElementById(chartId);
+    if(!canvas||!r.bars.length) return;
+    const recent=r.bars.slice(-252);
+    const labels=recent.map(b=>new Date(b.t).toLocaleDateString('en-US',{month:'short',day:'numeric'}));
+    const prices=recent.map(b=>b.c);
+    const isUp=prices[prices.length-1]>=prices[0];
+    if(charts[sym]) charts[sym].destroy();
+    charts[sym]=new Chart(canvas,{
       type:'line',
-      data:{labels,datasets:[{data:prices,borderColor:color,backgroundColor:color+'18',fill:true,borderWidth:1.5,pointRadius:0,tension:.2}]},
-      options:{
-        responsive:true,animation:false,
-        plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:c=>'$'+c.parsed.y.toFixed(2)}}},
-        scales:{
-          x:{ticks:{color:'#aaa',maxTicksLimit:5,font:{size:10}},grid:{color:'#f0f0f0'}},
-          y:{ticks:{color:'#aaa',font:{size:10},callback:v=>'$'+v.toFixed(0)},grid:{color:'#f0f0f0'}}
-        }
-      }
+      data:{labels,datasets:[{data:prices,borderColor:isUp?'#16a34a':'#dc2626',backgroundColor:(isUp?'#16a34a':'#dc2626')+'15',fill:true,borderWidth:1.5,pointRadius:0,tension:.2}]},
+      options:{responsive:true,animation:false,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:c=>'$'+c.parsed.y.toFixed(2)}}},scales:{x:{ticks:{color:'#bbb',maxTicksLimit:6,font:{size:9}},grid:{color:'#f5f5f5'}},y:{ticks:{color:'#bbb',font:{size:9},callback:v=>'$'+v.toFixed(0)},grid:{color:'#f5f5f5'}}}}
     });
   },50);
 }
 
-// ─── UTILS ────────────────────────────────────────────────────────────────────
-function sortBy(col){ if(sortCol===col) sortDir*=-1; else{sortCol=col;sortDir=-1;} renderTable(); }
-function isMarketOpen(){
-  const et=new Date(new Date().toLocaleString('en-US',{timeZone:'America/New_York'}));
-  const h=et.getHours(),m=et.getMinutes(),d=et.getDay();
-  return d>=1&&d<=5&&(h>9||(h===9&&m>=30))&&h<16;
-}
-function fmt(n){
-  if(n==null||isNaN(n)) return '—';
-  if(Math.abs(n)>=1e6) return (n/1e6).toFixed(2)+'M';
-  if(Math.abs(n)>=1e3) return n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
-  return n.toFixed(2);
-}
-function set(id, text, cls){
-  const el=document.getElementById(id);
-  if(!el) return;
-  el.textContent=text;
-  if(cls) el.className=(el.className.replace(/ ?(up|dn|neu)/g,'')+' '+cls).trim();
-}
+// ─── UTILS ────────────────────────────────────────────────────
+function isMarketOpen(){const et=new Date(new Date().toLocaleString('en-US',{timeZone:'America/New_York'}));const h=et.getHours(),m=et.getMinutes(),d=et.getDay();return d>=1&&d<=5&&(h>9||(h===9&&m>=30))&&h<16;}
+function fmt(n){if(n==null||isNaN(n))return '—';if(Math.abs(n)>=1e6)return(n/1e6).toFixed(2)+'M';if(Math.abs(n)>=1e3)return n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});return n.toFixed(2);}
 
-// ─── INIT ─────────────────────────────────────────────────────────────────────
-(async function(){
-  if(await checkAuth()){
-    document.getElementById('lock').style.display='none';
-    document.getElementById('app').style.display='block';
-    loadAllData();
-  }
-})();
-
-// Auto-refresh every 60s during market hours
-setInterval(()=>{ if(isMarketOpen()) loadAllData(); }, 60000);
+// ─── INIT ─────────────────────────────────────────────────────
+(async()=>{if(await checkAuth()){document.getElementById('lock').style.display='none';document.getElementById('app').style.display='block';loadAllData();}})();
+setInterval(()=>{if(isMarketOpen())loadAllData();},60000);
 </script>
 </body>
 </html>
