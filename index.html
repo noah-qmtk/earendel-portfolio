@@ -428,22 +428,263 @@ async function loadAllData(){
   renderStocks();
 }
 
-// ─── BIZ DESCRIPTIONS ─────────────────────────────────────────
-const BIZ={
-  AMD:  "Makes the chips that power gaming, AI servers, and data centers. Direct competitor to NVIDIA.",
-  NBIS: "Nebius — an AI cloud infrastructure company spun out of Yandex. Early stage, high risk/reward.",
-  INTC: "Intel — the original chip giant, now fighting to stay relevant in AI and manufacturing.",
-  RDDT: "Reddit — the social platform. Still figuring out how to monetize its massive user base.",
-  VRT:  "Vertiv — makes the power and cooling systems that data centers need to run AI. Picks-and-shovels AI play.",
-  JNJ:  "Johnson & Johnson — pharmaceutical and MedTech giant. Slow and steady, pays dividends.",
-  TMUS: "T-Mobile — the fastest-growing major US wireless carrier.",
-  MU:   "Micron — makes memory chips (DRAM, NAND). Cyclical business, but AI is driving huge demand.",
-  PTRN: "Palantron — check your position details.",
-  KLAR: "Klarna — the buy-now-pay-later fintech. Recently went public.",
-  GEMI: "Gemini-related crypto/fintech — check your position details.",
-  IBM:  "IBM — enterprise tech and AI consulting (Watson). Reinventing itself around hybrid cloud.",
-  OPEN: "Opendoor — buys and sells homes directly. Risky business model highly sensitive to interest rates.",
+// ─── THESIS: real, researched bull/bear cases per position ─────
+// Last refreshed: April 2026 — re-check after earnings
+const THESIS={
+  AMD:{
+    biz:"Designs CPUs and GPUs for PCs, gaming, data centers, and AI. Second-largest AI accelerator vendor behind NVIDIA. Sells MI300/MI400 'Instinct' chips that compete with NVIDIA's Blackwell/Rubin.",
+    bull:[
+      "OpenAI supply deal (6GW of GPUs, starting H2 2026) and reported $60B Meta deal for MI400 — real hyperscaler adoption, not just specs.",
+      "MI400 is projected to drive ~$7.2B revenue in 2026, and consensus models data-center GPU revenue more than doubling to ~$15B.",
+      "Unlike NVIDIA, AMD also owns the x86 server CPU franchise — EPYC is still taking share from Intel in data centers.",
+      "Valuation has compressed during the 2026 pullback while the order book keeps growing — risk/reward has improved."
+    ],
+    bear:[
+      "NVIDIA's CUDA software moat is the real bottleneck — not raw chip specs. Customers are sticky.",
+      "NVIDIA still holds ~80-90% of AI accelerator share. AMD needs to execute perfectly just to reach 15-20%.",
+      "Gaming + client PC businesses are cyclical and could weaken if consumer spending softens.",
+      "Your avg cost ($218) is above recent trading levels — you're underwater and recovery depends on MI400 ramp hitting."
+    ],
+    catalysts:"MI400 volume shipments H2 2026 · quarterly hyperscaler commentary on AMD adoption · CUDA alternatives (ROCm) getting traction · NVIDIA supply constraints that force customers to diversify",
+    breaks:"MI400 slips past 2026 · OpenAI or Meta reduces/cancels commitments · EPYC share in servers plateaus · NVIDIA's next-gen Rubin widens the gap instead of narrowing it",
+    verdict:"Intact but contested",
+    verdictNote:"The long-term AI story is real and hyperscaler deals validate the product. But the stock needs MI400 execution in the next 2 quarters to prove it. Hold if you believe; don't add until you see the ramp."
+  },
+  NBIS:{
+    biz:"Nebius — AI cloud infrastructure operator (Amsterdam HQ, originally spun out of Yandex). Rents GPU capacity to AI labs. Landed Meta ($27B / 5-yr) and Microsoft ($19.4B) as anchor tenants — ~$46B in committed revenue.",
+    bull:[
+      "Q4 2025 revenue grew 547% YoY. 2025 ARR hit $1.2B — beating own guidance by $250M.",
+      "Committed contracts from Meta and Microsoft alone cover multi-year revenue visibility — this isn't speculative demand.",
+      "GPU capacity remains supply-constrained industry-wide. Nebius building 1GW of capacity to meet it.",
+      "Management guides to $7-9B ARR by end of 2026 — implies 521-900% growth."
+    ],
+    bear:[
+      "2026 CapEx plan is $16-20B against only $3-3.4B of guided revenue. This is a balance-sheet bet — execution is everything.",
+      "Power availability (not demand) is the bottleneck. Any delay in bringing new sites online compresses the whole thesis.",
+      "Valuation is rich — trades at ~360x P/E. Any stumble on execution gets punished hard.",
+      "Dependent on NVIDIA supply and Meta/MSFT as concentrated customers. If either pulls back, the multi-year model reprices."
+    ],
+    catalysts:"New site power approvals · Q1/Q2 2026 ARR milestones · additional hyperscaler contracts · NVIDIA Rubin shipment timing",
+    breaks:"Power/permitting delays that push capacity past 2027 · Meta or MSFT renegotiating commitments · capital markets closing to unprofitable AI infra names",
+    verdict:"Intact — high conviction, high risk",
+    verdictNote:"This is the highest-beta name in your portfolio. If execution works, it's a multi-bagger. If power bottlenecks bite, it can halve fast. Size accordingly — you're in at $115 which is reasonable vs. current range."
+  },
+  INTC:{
+    biz:"Integrated device manufacturer — designs and fabs x86 CPUs for PCs and servers. Also operates a contract foundry (Intel Foundry Services) trying to win external customers. Lost manufacturing leadership to TSMC over the past decade; betting the company on '18A' to claw it back.",
+    bull:[
+      "18A node entered high-volume manufacturing Oct 2025. Yields improving ~7% per month — entering 2026 at 65-75% range.",
+      "Panther Lake (18A laptop CPU) could take 5-10% client share back from AMD in 2026.",
+      "US CHIPS Act money + strategic importance of domestic fabs creates government tailwind.",
+      "Sentiment has been washed out — sell-side has been bearish for years. Even modest execution could drive re-rating."
+    ],
+    bear:[
+      "Foundry segment is expected to bleed cash until 2028 — drags on margins and free cash flow for years.",
+      "Still no announced marquee external foundry customer (Apple, NVIDIA, Qualcomm). Without one, 18A is just for internal use.",
+      "TSMC is not standing still — N2 ramping in parallel, and they have 10+ years of customer trust.",
+      "Trades at ~50x 2027 earnings — expensive for a company without consistent GAAP profitability."
+    ],
+    catalysts:"First major external 18A customer announcement · 18A yield updates · Panther Lake launch and OEM adoption · 14A roadmap progress",
+    breaks:"18A yields stall below 70% · no external customer secured by late 2026 · foundry losses widen instead of narrowing · TSMC N2 takes share before Intel can compete",
+    verdict:"Turnaround in progress — unproven",
+    verdictNote:"This is a multi-year turnaround bet, not a 2026 story. You're underwater ($40 cost vs. current ~$30 range). The thesis requires patience — 24+ months to know if 18A is real. If you believe in US fab leadership, hold. If you don't, this capital is dead money."
+  },
+  RDDT:{
+    biz:"Reddit — ad-supported social platform with 100M+ daily active users. Two revenue lines: advertising (~95%) and AI data licensing to companies like Google and OpenAI (~5% but growing).",
+    bull:[
+      "Q4 2025 revenue grew 70% YoY. First full year of GAAP profitability ($530M net income).",
+      "Lower-funnel ad revenue (performance/conversion ads) doubled YoY — proving Reddit ads work, not just brand.",
+      "AI data licensing is a strategic moat — LLMs need human-written discussion data, and Reddit owns one of the biggest corpora. Projected $400M annual run-rate by 2027.",
+      "Down ~37% YTD as of April 2026 — sentiment has corrected sharply from peak."
+    ],
+    bear:[
+      "FTC inquiry into whether selling user-generated content for AI training is 'unfair or deceptive.' Unresolved regulatory risk.",
+      "AI data licensing economics aren't proven at scale — contracts with Google/OpenAI could be one-time, not recurring.",
+      "Ad market softening would hit revenue hard given 95% ad concentration.",
+      "User growth could stall — Reddit's niche is discussion, which is harder to monetize than short-form video."
+    ],
+    catalysts:"FTC ruling or settlement · new AI data licensing deals · quarterly ad revenue growth rate · DAU trend vs. Meta/TikTok",
+    breaks:"FTC bans data licensing model · ad revenue growth drops below 30% · major user exodus · Google de-prioritizes Reddit in search (traffic driver)",
+    verdict:"Intact after correction",
+    verdictNote:"Small position ($75 cost basis). The 37% drop has probably priced in a lot of AI-licensing uncertainty. If you believe Reddit is a legitimate AI data asset, this is a cheaper entry than 6 months ago."
+  },
+  VRT:{
+    biz:"Vertiv — makes the 'picks and shovels' for AI data centers: power management (UPS, busways), thermal management (liquid cooling), and rack infrastructure. Sits between the utility and the GPU.",
+    bull:[
+      "$15B backlog, with Q4 organic orders up 252% YoY. Management guides 2026 revenue $13.3-13.7B (+28%) and EPS +43%.",
+      "Liquid cooling is the bottleneck for AI clusters (>20kW per rack exceeds air cooling). Vertiv has an 18-24 month lead vs. competitors.",
+      "AI data-center capex is a 3-5 year cycle, not a 1-year spike. Vertiv gets paid whether NVIDIA or AMD wins.",
+      "Analyst targets raised to $300-310 by Barclays/Morgan Stanley."
+    ],
+    bear:[
+      "Trades at ~49x forward P/E — zero room for error. Any miss compresses multiple to 30-35x = 30-40% downside.",
+      "Hyperscalers (Google, Meta) are investing in their own cooling IP. Could reduce dependence on Vertiv over time.",
+      "Cyclical risk — if AI capex digests or recession hits, backlog orders can be pushed out or cancelled.",
+      "New entrants (Schneider, Eaton) ramping liquid cooling offerings — competitive pressure coming."
+    ],
+    catalysts:"Quarterly book-to-bill ratio · hyperscaler capex commentary · liquid cooling attach rate · margin expansion progress",
+    breaks:"Book-to-bill falls below 1.0 · major hyperscaler brings cooling in-house · backlog starts shrinking · margins compress meaningfully",
+    verdict:"Intact — earnings-driven",
+    verdictNote:"Tiny position (0.2 shares). The thesis is crystal clear: AI data centers need this stuff and the backlog proves it. Watch the quarterly book-to-bill and backlog growth — those are the key signal."
+  },
+  JNJ:{
+    biz:"Johnson & Johnson — pharma + MedTech conglomerate. Innovative Medicine (pharmaceuticals — Darzalex, Carvykti oncology, Stelara immunology) + MedTech (surgery, orthopedics, vision). Spun off consumer unit (Kenvue) in 2023.",
+    bull:[
+      "64 consecutive years of dividend increases. Classic 'sleep well at night' holding with 2.5-3% yield.",
+      "Oncology franchise strong — Darzalex + Carvykti both crossed $1B in annual sales. 28 billion-dollar platforms.",
+      "MedTech pipeline includes OTTAVA robotic surgery (FDA submission Jan 2026) — potential long-duration growth engine.",
+      "Stock up 60% over the past year — pipeline execution is getting rewarded."
+    ],
+    bear:[
+      "Stelara loss of exclusivity is a real revenue hole — biosimilars are eating into it, and 66% Medicare price cut compounds it.",
+      "Talc litigation: 67,000+ lawsuits, $15B reserved. Adverse Daubert ruling on appeal could force reserves materially higher.",
+      "IRA negotiations (Medicare price caps) are a structural margin headwind — likely expands to more drugs over time.",
+      "After the 60% run, valuation is less attractive — upside from here depends on pipeline hits."
+    ],
+    catalysts:"OTTAVA approval and launch · quarterly Innovative Medicine growth ex-Stelara · talc appeal ruling · oncology pipeline readouts",
+    breaks:"Major talc verdict that forces reserves materially higher · pipeline setback (OTTAVA delay, oncology failure) · IRA price cuts >20% on top drugs",
+    verdict:"Intact",
+    verdictNote:"This is your ballast. Not a multi-bagger — a stability anchor with growing dividends. You have a tiny position (0.1 shares) so the risk is de minimis. Hold."
+  },
+  TMUS:{
+    biz:"T-Mobile — US wireless carrier (#2 by subscribers). Also expanding into home broadband (fixed wireless) and fiber. Acquired Sprint in 2020, giving them the most mid-band 5G spectrum.",
+    bull:[
+      "Postpaid phone net adds industry-leading (3.3M in 2025). Free cash flow grew 80% YoY to $18B.",
+      "2.5GHz spectrum advantage = fastest and most widely available 5G in US. Won J.D. Power network quality sweep.",
+      "Fixed wireless broadband growing fast — 8.5M customers with goal of 15M by 2030. Targeting 3-4M fiber customers too.",
+      "$3B incremental EBITDA contribution expected from AI/digitalization by 2027.",
+      "Stock down ~21% in last 6 months — KeyBanc upgraded to Overweight citing compressed valuation."
+    ],
+    bear:[
+      "Converged fiber+wireless bundles from Verizon/AT&T threaten the stand-alone wireless model. T-Mobile's fiber buildout is still small relative to those peers.",
+      "Merger-related costs (UScellular) and higher cash taxes ahead could pressure EPS and FCF guidance.",
+      "Prepaid and wholesale revenue weakening — sign that not everything is firing.",
+      "Postpaid phone net adds expected to decline in coming years as market saturates."
+    ],
+    catalysts:"Postpaid net add reports each quarter · fiber subscriber milestones · ARPU trend (pricing power) · UScellular integration progress",
+    breaks:"Postpaid net adds go negative · ARPU declines · fiber buildout falls meaningfully behind schedule · major cable/fiber competitor undercuts meaningfully",
+    verdict:"Intact — temporarily out of favor",
+    verdictNote:"Fundamentals are fine — sentiment has just rotated. If the re-rating happens, the stock catches up. Hold."
+  },
+  MU:{
+    biz:"Micron — memory chip maker (DRAM, NAND, and critically HBM for AI GPUs). Cyclical historically, but HBM has changed the game — every NVIDIA/AMD AI chip needs Micron (or Hynix/Samsung) memory.",
+    bull:[
+      "2026 HBM capacity already sold out under binding contracts. Memory/packaging = ~2/3 of BOM of top AI GPUs.",
+      "Q2 guided to 68% non-GAAP gross margin — all-time high. Revenue growing 132% YoY.",
+      "Industry moving from quarterly to 3-5 year contracts — reducing cyclicality for the first time in Micron's history.",
+      "Only 50-60% of demand being met — that's pricing power, not problem."
+    ],
+    bear:[
+      "Memory is historically the most cyclical semi. Every prior cycle ended in glut and price collapse.",
+      "New HBM capacity from all three players comes online in late 2027 — that's when normalization risk starts.",
+      "Customers are over-ordering during tight supply (double/triple booking). When it unwinds, revenue can step down fast.",
+      "Your cost basis ($432) is extremely high — you're sitting on a loss and need multi-bagger performance from here."
+    ],
+    catalysts:"Quarterly HBM pricing/margin trends · customer long-term contract announcements · Hynix/Samsung production schedules · NVIDIA/AMD memory specs for next-gen",
+    breaks:"HBM pricing plateaus or declines · customer long-term contracts don't renew · capacity from Hynix/Samsung comes online early · AI training demand digests",
+    verdict:"Intact — late-cycle risk rising",
+    verdictNote:"The story is real — but you're buying deep into the cycle. The 3-5 year contracts are a big positive on cyclicality. Watch the late-2027 capacity additions closely; that's when to reassess."
+  },
+  PTRN:{
+    biz:"Pattern Group — ecommerce 'accelerator' that buys inventory from 200+ consumer brands and resells it across Amazon, Walmart, TikTok Shop, Coupang, and 70+ other marketplaces globally. Uses AI and data tooling to optimize listings, ads, and logistics.",
+    bull:[
+      "2026 revenue guide $3.12-3.16B (+25-26%). Adjusted EBITDA guide $180-182M (+17-19%).",
+      "Net revenue retention of 124% — existing brand partners keep spending more.",
+      "Non-Amazon revenue +60% full year, +94% in Q4. Diversifying off the Amazon-concentration risk.",
+      "Cash-generative, trades at barely 1x sales — not a concept stock."
+    ],
+    bear:[
+      "93% of revenue still from Amazon as of FY2025 — concentration is extreme.",
+      "69% of inventory is health & wellness brands — category concentration risk on top.",
+      "Bear Cave short report called it 'overhyped third-party Amazon seller' — low barriers, thin margins.",
+      "Insider selling has been flagged. Watch 10b5-1 plans and Form 4s."
+    ],
+    catalysts:"Non-Amazon revenue share each quarter (the de-risking signal) · category diversification beyond health/wellness · gross margin trend · insider transactions",
+    breaks:"Amazon changes marketplace terms unfavorably · non-Amazon revenue growth decelerates · major brand partners churn · margin compression from marketplace fees",
+    verdict:"Intact but watch concentration",
+    verdictNote:"You're in at $14 which is ground-floor if the non-Amazon diversification works. The thesis is that Pattern is an 'OS for ecommerce brands,' not a glorified reseller. Watch the marketplace diversification metric — that's the whole story."
+  },
+  KLAR:{
+    biz:"Klarna — Swedish BNPL (Buy Now Pay Later) fintech. 114M active users, 850K+ merchant integrations. IPO'd Sept 2025 at $40. Revenue from interest, merchant fees, and ads inside the Klarna app.",
+    bull:[
+      "BNPL market projected to reach $116.7B US payment value in 2026, growing 12% CAGR through 2028.",
+      "114M active users adding 27M/quarter. If retention holds, user base scales meaningfully in 2026.",
+      "Klarna guides to $155B+ GMV and $4.34B revenue in 2026 with adjusted operating margin >6.9% — path to profitability.",
+      "Stock down >30% since IPO — sentiment is depressed, valuation has come back to earth."
+    ],
+    bear:[
+      "Class action lawsuit over lending practices and loss reserves. Down 24% in one day in Feb 2026 on that news.",
+      "GMV per merchant is declining — shift to smaller merchants hurts unit economics.",
+      "UK and EU proposing formal BNPL regulation (affordability rules) — could increase compliance costs and limit underwriting.",
+      "Not yet consistently profitable. Credit cycle turning would be a real headwind to a consumer-credit business."
+    ],
+    catalysts:"2026 path to consistent profitability · BNPL regulatory decisions in UK/EU · quarterly GMV growth and take-rate · default/credit loss trends",
+    breaks:"Credit losses spike in a consumer slowdown · UK/EU regulation caps fees or tightens underwriting · major merchant churn · class-action becomes material",
+    verdict:"Uncertain — credit risk rising",
+    verdictNote:"This one I'd watch closely. You're at $40 cost basis, same as IPO. BNPL is a real consumer credit business — if the consumer weakens, this is among the first places it shows. Next 2 quarters of credit loss data are critical."
+  },
+  GEMI:{
+    biz:"Gemini Space Station — crypto exchange founded by the Winklevoss twins. Offers spot trading, custody, staking, and crypto payments infrastructure. IPO'd Sept 2025 at $28 (opened at $37).",
+    bull:[
+      "Analyst consensus rating 'Buy' with 12-month avg target ~$9.58 (vs. ~$4 current) = implied ~117% upside.",
+      "Full-service crypto platform (exchange + custody + staking + payments) rather than just a retail exchange.",
+      "Potential M&A interest — buyers reportedly circling European/UK operations.",
+      "Revenue +26% in 2025."
+    ],
+    bear:[
+      "Stock down ~85% from IPO price. Market is telling you something.",
+      "2025 net loss of $582M — losses ballooned 267% YoY even as revenue grew only 26%.",
+      "25% workforce cut, exited multiple international markets, three top executives departed. Operational turmoil.",
+      "Bitcoin drawdown of 40%+ gutted the bull-market assumptions baked into the IPO.",
+      "Coinbase, Kraken, and crypto-native brokers all pressure market share."
+    ],
+    catalysts:"Crypto market recovery (Bitcoin bottoming and reversing) · M&A takeout bid · cost-cutting showing up in Q2/Q3 margins · regulatory clarity in US",
+    breaks:"Another leg down in crypto prices · losses don't narrow in 2026 · Coinbase takes more share · forced dilutive capital raise",
+    verdict:"Weakening — high risk",
+    verdictNote:"This is the riskiest position in your portfolio by a wide margin. You're deeply underwater ($28 cost vs. ~$4 current). The bull case requires a crypto recovery AND operational turnaround AND no dilution. Honest question: if you wouldn't buy it here at $4, should you hold it?"
+  },
+  IBM:{
+    biz:"International Business Machines — enterprise IT. Software (Red Hat hybrid cloud, watsonx AI platform, automation), Consulting (GenAI implementation for Fortune 500), and Infrastructure (mainframes). Also a leader in quantum computing.",
+    bull:[
+      "GenAI book of business at $12.5B — real enterprise demand for AI integration.",
+      "Red Hat hybrid cloud maintaining 18%+ CAGR — durable software growth.",
+      "watsonx adoption accelerating. Software margin expansion pathway to 65%+ GAAP by 2028.",
+      "Quantum computing leadership is a true option — Quantum-Centric Supercomputing integrates quantum + classical HPC.",
+      "Median analyst target $340 implies ~39% upside from recent levels."
+    ],
+    bear:[
+      "13% single-day drop in Feb 2026 on fears Claude Code / GenAI will automate the COBOL modernization work IBM's consultants do — this is the existential threat.",
+      "Consulting is ~40% of revenue and grew just 3% in early 2026 — that's before the AI commoditization concern fully plays out.",
+      "80%+ of the $12.5B 'AI book' is still consulting, not software. If that model gets disrupted, the book is less valuable.",
+      "Mainframe/infrastructure is declining secularly — always a drag on consolidated growth."
+    ],
+    catalysts:"Watsonx revenue share of AI book (the key mix signal) · consulting revenue growth rate · quantum computing commercial contracts · Red Hat subscription growth",
+    breaks:"Consulting revenue goes negative · watsonx mix doesn't expand · Red Hat decelerates below 15% · GenAI tools demonstrably replace consulting work",
+    verdict:"Intact — but consulting threat is real",
+    verdictNote:"You're underwater ($311 vs. lower current range). The bull thesis requires watsonx adoption accelerating faster than GenAI erodes consulting. Watch the software/consulting mix in Q1 and Q2 2026 reports — that's the whole question."
+  },
+  OPEN:{
+    biz:"Opendoor — the original iBuyer. Buys homes directly from sellers, renovates them, resells them. New CEO Kaz Nejatian (ex-Shopify COO) is repositioning it from balance-sheet home trader to 'tech marketplace' for real estate — tighter pricing, faster turns, marketplace services like Cash Plus and Exclusives.",
+    bull:[
+      "You're right: the thesis is fundamentally a housing-market-velocity bet. If rates come down and the 'lock-in effect' continues to thaw, Opendoor's model scales directly with transaction volume.",
+      "Under Nejatian, acquisition velocity reportedly up 400%+ and employee-per-transaction drastically down — unit economics improving independent of rates.",
+      "Marketplace services (Cash Plus, Exclusives) — if they reach 40% of transaction volume, margin profile fundamentally changes (capital-light vs. balance-sheet-heavy).",
+      "Investors eyeing end of 2026 for potential adjusted net income profitability.",
+      "You're at $7.22 cost basis with 250 shares — the biggest share position in your portfolio. Low absolute price = more torque from any housing recovery."
+    ],
+    bear:[
+      "$1.3B FY2025 net loss (though $933M was one-time debt restructuring). Revenue actually fell from $5.2B to $4.4B.",
+      "Fed rate cuts are necessary but not sufficient — affordability also depends on prices, inventory, and consumer confidence.",
+      "iBuying model has never been consistently profitable through a full cycle — Zillow abandoned it, Redfin scaled back.",
+      "Highly levered balance sheet. Another downturn could force dilutive capital raise."
+    ],
+    catalysts:"Fed rate cut cadence · housing inventory and days-on-market data · Cash Plus / Exclusives revenue share · quarterly contribution margin · any adjusted-net-income positive quarter",
+    breaks:"Housing velocity doesn't recover in 2026 · marketplace services plateau below 20% · another dilutive equity raise · contribution margin goes negative in a down quarter",
+    verdict:"Intact — housing-rate-catalyst dependent",
+    verdictNote:"You were right to push back on the auto-generated 'weak fundamentals' flag. Opendoor's thesis is NOT about current numbers — it's about housing velocity + marketplace model shift. The question isn't 'is it profitable today' but 'does Nejatian's reset + Fed cuts = profitability in 2026-2027.' Biggest upside in portfolio if it works, real dilution risk if it doesn't. Sized well at $7 cost."
+  }
 };
+// Legacy BIZ object for back-compat (description only)
+const BIZ=Object.fromEntries(Object.entries(THESIS).map(([k,v])=>[k,v.biz]));
 
 // ─── RENDER HERO ──────────────────────────────────────────────
 function renderHero(){
@@ -484,9 +725,18 @@ function renderInsights(){
   cards.push({color:'blue',icon:'🕐',title:'You\'re a long-term investor — here\'s what actually matters',text:'Day-to-day price moves are noise. What matters over 5-15 years: Is the company growing revenue? Is it profitable (or on a path to be)? Is management allocating capital well? Is the stock reasonably priced relative to its future earnings? Use this dashboard to answer those 4 questions — not to react to daily swings.'});
 
   // Portfolio-level insight
-  const weakStories=data.filter(r=>r.storyHealth==='Weak').map(r=>r.sym);
+  // Weak fundamentals card — but skip tickers whose thesis is explicitly catalyst-dependent
+  // (e.g. OPEN is a housing-rate catalyst bet, not a "current-fundamentals" story)
+  const catalystDependent=['OPEN','NBIS','INTC','GEMI','KLAR'];
+  const weakStories=data.filter(r=>r.storyHealth==='Weak'&&!catalystDependent.includes(r.sym)).map(r=>r.sym);
   if(weakStories.length>0){
-    cards.push({color:'yellow',icon:'⚠️',title:`${weakStories.length} positions have weakening fundamentals`,text:`${weakStories.join(', ')} — these companies are showing signs of slowing growth or declining profitability. That doesn't mean sell today, but it means asking: has the story changed from when you bought? If yes, there may be better places to put this capital.`});
+    cards.push({color:'yellow',icon:'⚠️',title:`${weakStories.length} positions have weakening current fundamentals`,text:`${weakStories.join(', ')} — current profitability or growth is soft. Open the drawer on each to read the bull/bear thesis and decide whether the story has changed from when you bought.`});
+  }
+
+  // Catalyst-dependent positions card — make it explicit that these are bets on specific events
+  const catalystHolds=data.filter(r=>catalystDependent.includes(r.sym)).map(r=>r.sym);
+  if(catalystHolds.length>0){
+    cards.push({color:'blue',icon:'🎯',title:`${catalystHolds.length} positions are catalyst-driven bets, not current-fundamentals plays`,text:`${catalystHolds.join(', ')} — these aren't supposed to look great on current numbers. OPEN = housing rate cuts + Nejatian turnaround. NBIS = GPU capacity buildout. INTC = 18A foundry customer wins. KLAR = BNPL scale + profitability. GEMI = crypto recovery + cost cuts. Open each drawer for the bull/bear thesis and the specific catalysts to watch.`});
   }
 
   // Concentration risk
@@ -610,7 +860,45 @@ function buildDrawer(sym){
   // Explains
   const exHtml=r.explains.length?r.explains.map(e=>`<div style="padding:.5rem 0;border-bottom:1px solid #f5f5f5;font-size:.79rem;color:#444;line-height:1.6">${e}</div>`).join(''):`<div style="color:#aaa;font-size:.78rem">Insufficient fundamental data to generate insights.</div>`;
 
+  // Bull vs Bear thesis block
+  const t=THESIS[sym];
+  let thesisHtml='';
+  if(t){
+    const verdictColor=t.verdict.toLowerCase().includes('weakening')||t.verdict.toLowerCase().includes('uncertain')?'#d97706':t.verdict.toLowerCase().includes('broken')?'#dc2626':'#16a34a';
+    thesisHtml=`
+    <div class="det-section" style="grid-column:1/-1">
+      <h4 style="display:flex;align-items:center;gap:.5rem">The Bull Case vs The Bear Case
+        <span style="font-size:.7rem;padding:.2rem .55rem;border-radius:999px;background:${verdictColor}15;color:${verdictColor};font-weight:600;text-transform:uppercase;letter-spacing:.04em">${t.verdict}</span>
+      </h4>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:.6rem">
+        <div style="background:#f0fdf4;border-left:3px solid #16a34a;padding:.75rem .9rem;border-radius:6px">
+          <div style="font-size:.68rem;color:#15803d;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.5rem">🐂 Bull case — reasons to hold/add</div>
+          <ul style="margin:0;padding-left:1.1rem;font-size:.78rem;color:#333;line-height:1.55">${t.bull.map(b=>`<li style="margin-bottom:.4rem">${b}</li>`).join('')}</ul>
+        </div>
+        <div style="background:#fef2f2;border-left:3px solid #dc2626;padding:.75rem .9rem;border-radius:6px">
+          <div style="font-size:.68rem;color:#b91c1c;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.5rem">🐻 Bear case — reasons to worry</div>
+          <ul style="margin:0;padding-left:1.1rem;font-size:.78rem;color:#333;line-height:1.55">${t.bear.map(b=>`<li style="margin-bottom:.4rem">${b}</li>`).join('')}</ul>
+        </div>
+      </div>
+      <div style="margin-top:.9rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+        <div style="background:#fafafa;padding:.7rem .9rem;border-radius:6px;border:1px solid #eee">
+          <div style="font-size:.68rem;color:#666;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.35rem">📍 Catalysts to watch</div>
+          <div style="font-size:.76rem;color:#444;line-height:1.55">${t.catalysts}</div>
+        </div>
+        <div style="background:#fafafa;padding:.7rem .9rem;border-radius:6px;border:1px solid #eee">
+          <div style="font-size:.68rem;color:#666;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.35rem">🚨 What would break the thesis</div>
+          <div style="font-size:.76rem;color:#444;line-height:1.55">${t.breaks}</div>
+        </div>
+      </div>
+      <div style="margin-top:.9rem;background:#fffbeb;border:1px solid #fcd34d;padding:.75rem .95rem;border-radius:6px">
+        <div style="font-size:.68rem;color:#a16207;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.35rem">💡 Takeaway</div>
+        <div style="font-size:.8rem;color:#333;line-height:1.6">${t.verdictNote}</div>
+      </div>
+    </div>`;
+  }
+
   det.innerHTML=`
+    ${thesisHtml}
     <div class="det-section">
       <h4>What does ${sym} do?</h4>
       <div style="font-size:.82rem;color:#444;line-height:1.6;margin-bottom:.75rem">${r.bizDesc||'Business description not available.'}</div>
